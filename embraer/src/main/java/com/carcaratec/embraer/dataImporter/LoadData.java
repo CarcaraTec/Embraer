@@ -1,5 +1,8 @@
 package com.carcaratec.embraer.dataImporter;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.BufferedReader;
@@ -10,8 +13,10 @@ import java.util.List;
 
 public class LoadData {
 
-    public static String getBloco(String id) throws IOException, InterruptedException {
+    public static ResponseEntity<?> getBloco(int point) throws IOException, InterruptedException {
         // inicializa a variável que irá armazenar o conteúdo do arquivo csv
+        JSONObject content = new JSONObject();
+
         String conteudo = null;
 
         // caminho para o arquivo csv
@@ -27,21 +32,19 @@ public class LoadData {
 
             // lê a próxima linha do csv
             line = br.readLine();
-
+            int param = 1;
             // enquanto houver uma próxima linha
             while (line != null) {
                 // divide a linha atual pelo separador ";"
                 String[] vect = line.split(";");
 
-                // verifica se o valor da primeira coluna ("id") é igual ao valor do parâmetro "id"
-                if (vect[0].equals(id)) {
-                    // se sim, armazena o conteúdo da terceira coluna ("bloco")
-                    conteudo = vect[1];
-                    break;
+                if(point==param){
+                    content.put("sb",vect[0]);
+                    content.put("status",vect[1]);
                 }
 
-                // lê a próxima linha
                 line = br.readLine();
+                param++;
             }
         } catch (IOException e) {
             // em caso de erro, exibe a mensagem de erro
@@ -51,15 +54,15 @@ public class LoadData {
         // verifica se o conteúdo foi encontrado
         if (conteudo == null) {
             // se não foi, retorna o código de erro 404
-            return "404";
+            return ResponseEntity.notFound().build();
         } else {
             // se foi, retorna o conteúdo como resposta
-            return conteudo;
+            return ResponseEntity.ok(content);
         }
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println(getBloco("SB FAT-00-CG10"));
+        System.out.println(getBloco(2));
     }
 
 }
