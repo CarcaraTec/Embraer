@@ -13,4 +13,20 @@ public class ChassiItem {
 
     @Column(name = "ID_ITEM")
     private Integer idItem;
+
+    public Integer getIdChassi() {
+        return idChassi;
+    }
+
+    public void setIdChassi(Integer idChassi) {
+        this.idChassi = idChassi;
+    }
+
+    public Integer getIdItem() {
+        return idItem;
+    }
+
+    public void setIdItem(Integer idItem) {
+        this.idItem = idItem;
+    }
 }

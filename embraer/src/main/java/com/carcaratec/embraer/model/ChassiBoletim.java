@@ -16,4 +16,28 @@ public class ChassiBoletim {
 
     @Column(name = "STATUS")
     private String status;
+
+    public Integer getIdChassi() {
+        return idChassi;
+    }
+
+    public void setIdChassi(Integer idChassi) {
+        this.idChassi = idChassi;
+    }
+
+    public String getIdBoletim() {
+        return idBoletim;
+    }
+
+    public void setIdBoletim(String idBoletim) {
+        this.idBoletim = idBoletim;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
