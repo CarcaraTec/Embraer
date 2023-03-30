@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -23,12 +26,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoadData {
 
-    public ResponseEntity<ChassiBoletim> getBloco(int point) throws IOException, InterruptedException {
+    public ResponseEntity<ChassiBoletim> getBloco(int point, String path) throws IOException, InterruptedException {
         // inicializa a variável que irá armazenar o conteúdo do arquivo csv
         ChassiBoletim chassi = new ChassiBoletim();
 
         // caminho para o arquivo csv
-        String path = "C:\\Users\\Luara Amaral\\Documents\\GitHub\\Embraer\\embraer\\src\\main\\java\\com\\carcaratec\\embraer\\csv\\Sample_-_Chassis_10000076.csv";
 
         // cria uma lista para armazenar os valores do csv
         List<String> list = new ArrayList<>();
@@ -71,9 +73,8 @@ public class LoadData {
 
     }
 
-    public int countLine() throws IOException, InterruptedException {
+    public int countLine(String path) throws IOException, InterruptedException {
         // caminho para o arquivo csv
-        String path = "C:\\Users\\Luara Amaral\\Documents\\GitHub\\Embraer\\embraer\\src\\main\\java\\com\\carcaratec\\embraer\\csv\\Sample_-_Chassis_10000076.csv";
 
         // cria uma lista para armazenar os valores do csv
         List<String> list = new ArrayList<>();
@@ -110,7 +111,7 @@ public class LoadData {
 
 
 
-    public static void convert(String inputFilePath) throws IOException {
+    public void convert(String inputFilePath) throws IOException {
         // Abre o arquivo XLSX
         FileInputStream inputStream = new FileInputStream(inputFilePath);
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -150,12 +151,19 @@ public class LoadData {
         workbook.close();
     }
 
-
-    public static void main(String[] args) throws IOException {
-            String inputFilePath = "C:\\Users\\Luara Amaral\\Documents\\GitHub\\Embraer\\embraer\\src\\main\\java\\com\\carcaratec\\embraer\\csv\\Sample_-_Chassis_10000076.xlsx";
-            convert(inputFilePath);
-        }
-
+    public String encodar(String path) {
+     try {
+         String decodedUrl = URLDecoder.decode(path, "UTF-8");
+        String url = decodedUrl;
+        System.out.println(url);
+        return url;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+     return "400";
+}
+}
+
+
 
 

@@ -11,10 +11,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,16 +55,21 @@ public class ChassiController {
     }
 
     @PostMapping("/insertA")
-    public ResponseEntity<?> insertA() throws IOException, InterruptedException {
+    public ResponseEntity<?> insertA(@RequestParam ("path") String path) throws IOException, InterruptedException {
         Chassi chassi = new Chassi();
         BoletimServico boletimServico = new BoletimServico();
         ChassiBoletim chassiBoletim = new ChassiBoletim();
-
         LoadData loadData = new LoadData();
-        int lines = loadData.countLine();
+        path = loadData.encodar(path);
+        loadData.convert(path);
+        String[] path2 = path.split(".");
+
+        path = path2[0] + ".csv";
+
+        int lines = loadData.countLine(path);
 
         for(int i = 1;i<=lines;i++){
-            chassiBoletim = loadData.getBloco(i).getBody();
+            chassiBoletim = loadData.getBloco(i, path).getBody();
             chassi.setIdChassi(chassiBoletim.getIdChassi());
             boletimServico.setIdBoletim(chassiBoletim.getIdBoletim());
 
