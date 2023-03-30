@@ -15,3 +15,8 @@
 
 ## Team
 
+![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
+
+
+
+
