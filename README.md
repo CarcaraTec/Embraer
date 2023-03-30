@@ -5,6 +5,8 @@
 
 ## Challenge
 
+Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
+
 ## Backlog
 
 ## Data Modeling
@@ -16,7 +18,3 @@
 ## Team
 
 ![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
-
-
-
-

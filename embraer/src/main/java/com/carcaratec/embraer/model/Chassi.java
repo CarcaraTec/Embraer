@@ -4,35 +4,17 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "BOLTEST")
+@Table(name = "CHASSI")
 public class Chassi {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "ID_ITEM", nullable = false)
-    private Integer idItem;
+    @Column(name = "ID_CHASSI", nullable = false)
+    private Integer idChassi;
 
-    @Column(name = "ID_BOLETIM")
-    private String idBoletim;
-
-
-//
-//    @Column(name = "DATA_REGISTRO")
-//    private LocalDateTime dataRegistro;
-
-
-    public Integer getIdItem() {
-        return idItem;
+    public Integer getIdChassi() {
+        return idChassi;
     }
 
-    public void setIdItem(Integer idItem) {
-        this.idItem = idItem;
-    }
-
-    public String getIdBoletim() {
-        return idBoletim;
-    }
-
-    public void setIdBoletim(String idBoletim) {
-        this.idBoletim = idBoletim;
+    public void setIdChassi(Integer idChassi) {
+        this.idChassi = idChassi;
     }
 }

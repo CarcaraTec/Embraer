@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class BoletimServico {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_boletim", nullable = false, length = 50)
     private String idBoletim;
 
