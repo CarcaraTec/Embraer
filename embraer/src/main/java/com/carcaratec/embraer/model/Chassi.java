@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Table(name = "CHASSI")
 public class Chassi {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
 

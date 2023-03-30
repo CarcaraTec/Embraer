@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class ChassiBoletim {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
 
