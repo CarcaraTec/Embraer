@@ -2,6 +2,7 @@ package com.carcaratec.embraer.dataImporter;
 
 import com.carcaratec.embraer.model.ChassiBoletim;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.apache.poi.ss.usermodel.CellType;
 import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoadData {
 
@@ -99,4 +108,54 @@ public class LoadData {
     }
 
 
-}
+
+
+    public static void convert(String inputFilePath) throws IOException {
+        // Abre o arquivo XLSX
+        FileInputStream inputStream = new FileInputStream(inputFilePath);
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        // Cria o arquivo CSV de saída no mesmo diretório que o arquivo XLSX
+        String outputFilePath = inputFilePath.replace(".xlsx", ".csv");
+        FileOutputStream outputStream = new FileOutputStream(outputFilePath);
+
+        // Percorre todas as linhas e células da planilha
+        for (Row row : sheet) {
+            StringBuilder sb = new StringBuilder();
+            for (Cell cell : row) {
+                // Verifica o tipo da célula
+                if (cell.getCellType() == CellType.NUMERIC) {
+                    // Converte o valor numérico em uma string
+                    sb.append(String.valueOf(cell.getNumericCellValue()));
+                } else {
+                    // Adiciona o valor da célula como uma string
+                    sb.append(cell.getStringCellValue());
+                }
+                // Adiciona uma vírgula para separar as células
+                sb.append(";");
+            }
+            // Remove a última vírgula
+            sb.deleteCharAt(sb.length() - 1);
+            // Adiciona uma quebra de linha
+            sb.append("\n");
+            // Escreve a linha no arquivo CSV
+            outputStream.write(sb.toString().getBytes());
+        }
+
+        // Fecha os streams de leitura e escrita
+        inputStream.close();
+        outputStream.close();
+        // Fecha o workbook
+        workbook.close();
+    }
+
+
+    public static void main(String[] args) throws IOException {
+            String inputFilePath = "C:\\Users\\Luara Amaral\\Documents\\GitHub\\Embraer\\embraer\\src\\main\\java\\com\\carcaratec\\embraer\\csv\\Sample_-_Chassis_10000076.xlsx";
+            convert(inputFilePath);
+        }
+
+    }
+
+
