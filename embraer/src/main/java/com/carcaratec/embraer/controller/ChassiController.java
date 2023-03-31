@@ -4,12 +4,14 @@ import com.carcaratec.embraer.dataImporter.LoadData;
 import com.carcaratec.embraer.model.BoletimServico;
 import com.carcaratec.embraer.model.Chassi;
 import com.carcaratec.embraer.model.ChassiBoletim;
+import com.carcaratec.embraer.model.Path;
 import com.carcaratec.embraer.repository.BoletimServicoRepository;
 import com.carcaratec.embraer.repository.ChassiBoletimRepository;
 import com.carcaratec.embraer.repository.ChassiRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,21 +57,22 @@ public class ChassiController {
     }
 
     @PostMapping("/insertA")
-    public ResponseEntity<?> insertA(@RequestParam ("path") String path) throws IOException, InterruptedException {
+    public ResponseEntity<?> insertA(@RequestBody Path path) throws IOException, InterruptedException {
         Chassi chassi = new Chassi();
         BoletimServico boletimServico = new BoletimServico();
         ChassiBoletim chassiBoletim = new ChassiBoletim();
         LoadData loadData = new LoadData();
-        path = loadData.encodar(path);
-        loadData.convert(path);
-        String[] path2 = path.split(".");
+        String p = path.getCaminho();
+        System.out.println(path);
+        loadData.convert(p);
+        String[] path2 = p.split("\\.");
 
-        path = path2[0] + ".csv";
+        p = path2[0] + ".csv";
 
-        int lines = loadData.countLine(path);
+        int lines = loadData.countLine(p);
 
         for(int i = 1;i<=lines;i++){
-            chassiBoletim = loadData.getBloco(i, path).getBody();
+            chassiBoletim = loadData.getBloco(i, p).getBody();
             chassi.setIdChassi(chassiBoletim.getIdChassi());
             boletimServico.setIdBoletim(chassiBoletim.getIdBoletim());
 
