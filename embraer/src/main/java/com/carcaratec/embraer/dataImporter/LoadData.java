@@ -1,24 +1,17 @@
 package com.carcaratec.embraer.dataImporter;
 
 import com.carcaratec.embraer.model.ChassiBoletim;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.poi.ss.usermodel.*;
-import org.json.JSONObject;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -109,10 +102,12 @@ public class LoadData {
 
 
 
-    public void convert(String inputFilePath, String outputFilePath, char delimiter) throws IOException {
+    public void convert(String outputFilePath, String inputFilePath) throws IOException {
         // Abre o arquivo XLSX
         try (FileInputStream inputStream = new FileInputStream(inputFilePath);
              XSSFWorkbook workbook = new XSSFWorkbook(inputStream)) {
+
+            String delimiter = ";";
 
             // Obtém a primeira planilha
             XSSFSheet sheet = workbook.getSheetAt(0);

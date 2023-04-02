@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "CHASSI")
 public class Chassi {
+
     @Id
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
