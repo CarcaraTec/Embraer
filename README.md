@@ -24,7 +24,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
 
-- [ ] **Feira de Soluções** - 13/06/2023 e 14/06/2023 às 19h
+- [ ] **Solutions fair** - 13/06/2023 and 14/06/2023 at 7pm
 
 
 
