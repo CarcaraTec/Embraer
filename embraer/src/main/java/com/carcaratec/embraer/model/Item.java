@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID_ITEM", nullable = false)
     private Integer idItem;
 

@@ -1,4 +1,4 @@
-![slide1](https://github.com/CarcaraTec/Embraer/blob/0bb3e713171db4ab27c0d4245d3d740156a9de88/Documents/AIRCRAFT%20CONFIGURATION%20CONTROL.png)
+![slide1](https://github.com/CarcaraTec/Embraer/blob/3e04967df5e8a75c8860d1c18d60885881d5225f/Documents/images/Aircraft%20Configuration%20Control.png)
 
 <h4 align="center"> 
  <a href="https://docs.oracle.com/en/java/"><img src = "https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white"/></a>
@@ -12,7 +12,7 @@
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
 ## Sprints schedule
-![slide2](https://github.com/CarcaraTec/Embraer/blob/bc3b590d9c330c106f08c91e32df4e25e900fb2e/Documents/images/Schudle.png)
+![slide2](https://github.com/CarcaraTec/Embraer/blob/b16730133d34dfde5cea6b0aee136eb08be382bd/Documents/images/Schudle.png)
 
 
 
@@ -28,6 +28,6 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 ## Team
 
-![team](https://github.com/CarcaraTec/Embraer/blob/9a6975ddd3e5ae6c274bcd8220c58cffad4d56f0/Documents/images/Team.png)
+![team](https://github.com/CarcaraTec/Embraer/blob/b16730133d34dfde5cea6b0aee136eb08be382bd/Documents/images/Team.png)
 
 ![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
