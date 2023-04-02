@@ -7,14 +7,13 @@
  <a href="https://www.oracle.com/br/"><img src = "https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=black"/></a>
 </h4>
 
+
 ## Challenge
 
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
 ## Sprints schedule
 ![slide2](https://github.com/CarcaraTec/Embraer/blob/b16730133d34dfde5cea6b0aee136eb08be382bd/Documents/images/Schudle.png)
-
-
 
 
 ## Backlog
@@ -25,6 +24,34 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## Burndown
 
 ## Technology and tools
+
+<details>
+<summary>Back-End</summary>
+
+- `Java`
+- `Spring boot`
+
+</details>
+
+<details>
+<summary>Front-End</summary>
+
+- `Vue`
+</details>
+
+<details>
+<summary>Database</summary>
+
+- `Oracle Autonomous Database`]
+</details>
+
+<details>
+<summary>Tools</summary>
+
+- `Intellij`
+- `Visual Studio code`
+
+</details>
 
 ## Team
 
