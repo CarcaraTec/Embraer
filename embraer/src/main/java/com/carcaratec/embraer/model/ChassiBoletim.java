@@ -1,15 +1,20 @@
 package com.carcaratec.embraer.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "CHASSI_BOLETIM")
+@AllArgsConstructor
+@NoArgsConstructor
 public class ChassiBoletim {
 
-    @Id
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
 
+    @Id
     @Column(name = "ID_BOLETIM")
     private String idBoletim;
 

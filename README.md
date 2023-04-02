@@ -20,12 +20,14 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## Backlog
 
 ## Data Modeling
+![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
 
 ## Burndown
 
 ## Technology and tools
 
 ## Team
-![slideteam](https://github.com/CarcaraTec/Embraer/blob/f37998aa377dc17d338f04b38d37984be01a8c42/Documents/images/Equipe.png)
+
+![team](https://github.com/CarcaraTec/Embraer/blob/9a6975ddd3e5ae6c274bcd8220c58cffad4d56f0/Documents/images/Team.png)
 
 ![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
