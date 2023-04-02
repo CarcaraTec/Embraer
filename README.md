@@ -42,7 +42,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 <details>
 <summary>Database</summary>
 
-- `Oracle Autonomous Database`]
+- `Oracle Autonomous Database`
 </details>
 
 <details>
