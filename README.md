@@ -28,6 +28,6 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 ## Team
 
-![team](https://github.com/CarcaraTec/Embraer/blob/b16730133d34dfde5cea6b0aee136eb08be382bd/Documents/images/Team.png)
+![team](https://github.com/CarcaraTec/Embraer/blob/6c43e6e09e3922b10e031b7ae7a109ea76949c12/Documents/images/Team.png)
 
 ![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
