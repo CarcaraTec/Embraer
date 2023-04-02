@@ -13,7 +13,19 @@
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
 ## Sprints schedule
-![slide2](https://github.com/CarcaraTec/Embraer/blob/b16730133d34dfde5cea6b0aee136eb08be382bd/Documents/images/Schudle.png)
+
+- [x] **Kickoff** - 13/02/2023 a 03/03/2023
+
+- [x] **SPRINT 1** - 13/03/2023 a 02/04/2023
+
+- [ ] **SPRINT 2** - 03/04/2023 a 23/04/2023
+
+- [ ] **SPRINT 3** - 24/04/2023 a 14/05/2023
+
+- [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
+
+- [ ] **Feira de Soluções** - 13/06/2023 e 14/06/2023 às 19h
+
 
 
 ## Backlog
