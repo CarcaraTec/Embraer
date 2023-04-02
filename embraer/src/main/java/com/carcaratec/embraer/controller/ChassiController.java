@@ -65,68 +65,39 @@ public class ChassiController {
     // Definição da rota para a requisição HTTP GET
     @GetMapping("/logica")
     public List<ItemReturn> logica(@RequestParam("idChassi") Integer idChassi) {
-
-
-        // Criação de uma lista vazia para armazenar objetos do tipo ItemReturn
         List<ItemReturn> listItemReturn = new ArrayList<>();
-        // Busca no banco de dados todos os objetos do tipo Item
-        List<Item> listItem = itemRepository.findAll();
-        // Iteração por todos os objetos do tipo Item encontrados
-        for (int i = 0; i < listItem.size(); i++) {
-            // Criação de um novo objeto ItemReturn
 
-            // Busca no banco de dados todos os objetos do tipo Logica associados ao Item atual
-            List<Logica> listLogica = logicaRepository.findByItem(listItem.get(i).getIdItem());
-            // Iteração por todos os objetos do tipo Logica encontrados
-            for (int x = 0; x < listLogica.size(); x++) {
+        List<Item> listItem = itemRepository.findAll();
+
+        for (Item item : listItem) {
+            List<Logica> listLogica = logicaRepository.findByItem(item.getIdItem());
+
+            for (Logica logica : listLogica) {
                 ItemReturn itemReturn = new ItemReturn();
 
-                Integer idItem;
-                String nomeItem;
+                Integer idItem = item.getIdItem();
+                String nomeItem = item.getNome();
                 String statusItem1 = "null";
                 String statusItem2 = "null";
 
-                // Busca no banco de dados todos os objetos do tipo ChassiBoletim associados ao primeiro input da Logica atual e ao idChassi recebido como parâmetro
-                List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository
-                        .findBoletimByIdAndChassi(listLogica.get(x).getInput1(), idChassi);
-                String operacao = listLogica.get(x).getOperacao();
+                List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository.findBoletimByIdAndChassi(logica.getInput1(), idChassi);
+                boolean notEmptyBoletim1 = !listChassiBoletim1.isEmpty();
 
-                boolean notEmptyBoletim1 = true;
-                if(listChassiBoletim1.isEmpty()){
-                    notEmptyBoletim1 = false;
-                }
-                // Verifica se a operação da Logica atual é OR ou se a lista de ChassiBoletim encontrada não é nula
-                if (operacao.contains("OR") || notEmptyBoletim1 == true) {
-                    // Busca no banco de dados todos os objetos do tipo ChassiBoletim associados ao segundo input da Logica atual e ao idChassi recebido como parâmetro
-                    List<ChassiBoletim> listChassiBoletim2 = chassiBoletimRepository
-                            .findBoletimByIdAndChassi(listLogica.get(x).getInput2(), idChassi);
+                String operacao = logica.getOperacao();
 
-                    boolean notEmptyBoletim2 = true;
-                    if(listChassiBoletim2.isEmpty()){
-                        notEmptyBoletim2 = false;
-                    }
+                if (operacao.contains("OR") || notEmptyBoletim1) {
+                    List<ChassiBoletim> listChassiBoletim2 = chassiBoletimRepository.findBoletimByIdAndChassi(logica.getInput2(), idChassi);
+                    boolean notEmptyBoletim2 = !listChassiBoletim2.isEmpty();
 
-                    idItem = listItem.get(i).getIdItem();
-                    nomeItem = listItem.get(i).getNome();
-
-
-                    // Verifica se a lista de ChassiBoletim encontrada no primeiro input da Logica atual não é nula
-                    if (notEmptyBoletim1 == true) {
-                        // Preenche os dados do objeto ItemReturn com os dados do Item atual
-                        // Verifica o status do primeiro objeto ChassiBoletim encontrado e define o valor da propriedade "instalado" do objeto ItemReturn de acordo
-                        if (listChassiBoletim1.get(x).getStatus().equals("INCORPORATED")) {
+                    if (notEmptyBoletim1) {
+                        if (listChassiBoletim1.get(0).getStatus().equals("INCORPORATED")) {
                             statusItem1 = "INCORPORATED";
                         } else {
                             statusItem1 = "APPLICABLE";
                         }
-                        // Adiciona o objeto ItemReturn preenchido à lista de ItemReturn
-
-                        // Define os índices de iteração para valores que garantem a interrupção dos loops externo e interno
                     }
-                    if(notEmptyBoletim2 == true){
-
-                        // Verifica o status do primeiro objeto ChassiBoletim encontrado e define o valor da propriedade "instalado" do objeto ItemReturn de acordo
-                        if (listChassiBoletim2.get(x).getStatus().equals("INCORPORATED")) {
+                    if (notEmptyBoletim2) {
+                        if (listChassiBoletim2.get(0).getStatus().equals("INCORPORATED")) {
                             statusItem2 = "INCORPORATED";
                         } else {
                             statusItem2 = "APPLICABLE";
@@ -135,23 +106,24 @@ public class ChassiController {
                     itemReturn.setIdItem(idItem);
                     itemReturn.setNome(nomeItem);
 
-                    if(statusItem1.contains("INCORPORATED") || statusItem2.contains("INCORPORATED")){
+                    if (statusItem1.contains("INCORPORATED") || statusItem2.contains("INCORPORATED")) {
                         itemReturn.setStatus("INCORPORATED");
-                    }else {
+                    } else {
                         itemReturn.setStatus("APPLICABLE");
                     }
                     listItemReturn.add(itemReturn);
-                }else{
-                    itemReturn.setIdItem(listItem.get(i).getIdItem());
-                    itemReturn.setNome(listItem.get(i).getNome());
+                } else {
+                    itemReturn.setIdItem(idItem);
+                    itemReturn.setNome(nomeItem);
                     itemReturn.setStatus("NOT APPLICABLE");
                     listItemReturn.add(itemReturn);
                 }
             }
         }
-        // Retorna a lista de ItemReturn preenchidos
+
         return listItemReturn;
     }
+
 
 
 //    @GetMapping("/teste")
