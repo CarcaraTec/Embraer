@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "LOGICA")
-public class Logica {
+public class LogicaBoletim {
 
     @Column(name = "ID_LOGICA", nullable = false)
     private Integer idLogica;
