@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://d6ec-2804-431-c7da-7461-7408-68c-38db-7c07.sa.ngrok.io/")
 @RestController
 public class ChassiController {
     @PersistenceContext
@@ -35,7 +34,7 @@ public class ChassiController {
     private ItemRepository itemRepository;
 
     @Autowired
-    private LogicaRepository logicaRepository;
+    private LogicaBoletimRepository logicaBoletimRepository;
 
     @GetMapping("/chassis")
     public List<Chassi> listarChassi() {
@@ -70,24 +69,35 @@ public class ChassiController {
         List<Item> listItem = itemRepository.findAll();
 
         for (Item item : listItem) {
-            List<Logica> listLogica = logicaRepository.findByItem(item.getIdItem());
+            ItemReturn itemReturn = new ItemReturn();
 
-            for (Logica logica : listLogica) {
-                ItemReturn itemReturn = new ItemReturn();
+            List<LogicaBoletim> listLogicaBoletim = logicaBoletimRepository.findByItem(item.getIdItem());
+
+            if(listLogicaBoletim.isEmpty()){
+                itemReturn.setIdItem(item.getIdItem());
+                itemReturn.setNome(item.getNome());
+                itemReturn.setStatus("\uD83E\uDD14");
+                listItemReturn.add(itemReturn);
+            }
+
+            for (LogicaBoletim logicaBoletim : listLogicaBoletim) {
 
                 Integer idItem = item.getIdItem();
                 String nomeItem = item.getNome();
                 String statusItem1 = "null";
                 String statusItem2 = "null";
 
-                List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository.findBoletimByIdAndChassi(logica.getInput1(), idChassi);
+                List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository.findBoletimByIdAndChassi(logicaBoletim.getInput1(), idChassi);
                 boolean notEmptyBoletim1 = !listChassiBoletim1.isEmpty();
 
-                String operacao = logica.getOperacao();
+                String operacao = logicaBoletim.getOperacao();
 
-                if (operacao.contains("OR") || notEmptyBoletim1) {
-                    List<ChassiBoletim> listChassiBoletim2 = chassiBoletimRepository.findBoletimByIdAndChassi(logica.getInput2(), idChassi);
+                    List<ChassiBoletim> listChassiBoletim2 = chassiBoletimRepository.findBoletimByIdAndChassi(logicaBoletim.getInput2(), idChassi);
                     boolean notEmptyBoletim2 = !listChassiBoletim2.isEmpty();
+
+                    if(logicaBoletim.getInput2()==null){
+                        operacao = "OR";
+                    }
 
                     if (notEmptyBoletim1) {
                         if (listChassiBoletim1.get(0).getStatus().equals("INCORPORATED")) {
@@ -106,18 +116,34 @@ public class ChassiController {
                     itemReturn.setIdItem(idItem);
                     itemReturn.setNome(nomeItem);
 
-                    if (statusItem1.contains("INCORPORATED") || statusItem2.contains("INCORPORATED")) {
-                        itemReturn.setStatus("INCORPORATED");
-                    } else {
-                        itemReturn.setStatus("APPLICABLE");
+                    if(operacao.contains("OR")) {
+                        if(notEmptyBoletim1 || notEmptyBoletim2) {
+                            if (statusItem1.contains("INCORPORATED") || statusItem2.contains("INCORPORATED")) {
+                                itemReturn.setStatus("✔");
+                            } else {
+                                itemReturn.setStatus("❌");
+                            }
+                        }else {
+                            itemReturn.setStatus("❌");
+                        }
+                    }else if(operacao.contains("AND")){
+                        if(notEmptyBoletim1 && notEmptyBoletim2) {
+                            if (statusItem1.contains("INCORPORATED") && statusItem2.contains("INCORPORATED")) {
+                                itemReturn.setStatus("✔");
+                            } else {
+                                itemReturn.setStatus("❌");
+                            }
+                        }else{
+                            itemReturn.setStatus("❌");
+                        }
                     }
                     listItemReturn.add(itemReturn);
-                } else {
-                    itemReturn.setIdItem(idItem);
-                    itemReturn.setNome(nomeItem);
-                    itemReturn.setStatus("NOT APPLICABLE");
-                    listItemReturn.add(itemReturn);
-                }
+
+//                    itemReturn.setIdItem(idItem);
+//                    itemReturn.setNome(nomeItem);
+//                    itemReturn.setStatus("NOT APPLICABLE");
+//                    listItemReturn.add(itemReturn);
+
             }
         }
 
