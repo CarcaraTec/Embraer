@@ -29,7 +29,6 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 
 ## Backlog
-![modeling](https://github.com/CarcaraTec/Embraer/blob/main/Documents/images/SPRINT%201%20backlog.png)
 
 ![productbacklog](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/PRODUCT%20BACKLOG.png)
 ![backlogsprint](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/SPRINT%20BACK%20LOG.png)
