@@ -30,10 +30,15 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 ## Backlog
 
+![productbacklog](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/PRODUCT%20BACKLOG.png)
+![backlogsprint](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/SPRINT%20BACK%20LOG.png)
+
 ## Data Modeling
 ![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
 
 ## Burndown
+
+![burndown](https://github.com/CarcaraTec/Embraer/blob/8af2515751a1603a8bf08410334d8766e8e8ce9a/Documents/images/BURNDOWN%20EMBRAER%201.png)
 
 ## Technology and tools
 
