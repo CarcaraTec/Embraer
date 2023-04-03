@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@CrossOrigin(origins = "https://d6ec-2804-431-c7da-7461-7408-68c-38db-7c07.sa.ngrok.io/")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class ChassiController {
     @PersistenceContext
@@ -35,6 +35,9 @@ public class ChassiController {
 
     @Autowired
     private LogicaBoletimRepository logicaBoletimRepository;
+
+    @Autowired
+    private LogicaFabricaRepository logicaFabricaRepository;
 
     @GetMapping("/chassis")
     public List<Chassi> listarChassi() {
@@ -74,9 +77,20 @@ public class ChassiController {
             List<LogicaBoletim> listLogicaBoletim = logicaBoletimRepository.findByItem(item.getIdItem());
 
             if(listLogicaBoletim.isEmpty()){
+
+                List<LogicaFabrica> listFabrica = logicaFabricaRepository.findByIdItem(item.getIdItem());
                 itemReturn.setIdItem(item.getIdItem());
                 itemReturn.setNome(item.getNome());
-                itemReturn.setStatus("\uD83E\uDD14");
+                if(!listFabrica.isEmpty()){
+                    Integer chassiMinimo = listFabrica.get(0).getChassiMinimo();
+                    if(chassiMinimo<=idChassi){
+                        itemReturn.setStatus("✔");
+                    }else {
+                        itemReturn.setStatus("❌");
+                    }
+                }else {
+                    itemReturn.setStatus("❌");
+                }
                 listItemReturn.add(itemReturn);
             }
 
@@ -138,15 +152,8 @@ public class ChassiController {
                         }
                     }
                     listItemReturn.add(itemReturn);
-
-//                    itemReturn.setIdItem(idItem);
-//                    itemReturn.setNome(nomeItem);
-//                    itemReturn.setStatus("NOT APPLICABLE");
-//                    listItemReturn.add(itemReturn);
-
             }
         }
-
         return listItemReturn;
     }
 
@@ -202,12 +209,5 @@ public class ChassiController {
     }
 
 
-    public static void main(String[] args) {
-        JSONObject a = new JSONObject();
-
-        for (int i = 0; i < a.length(); i++) {
-            System.out.println(a);
-        }
-    }
 
 }

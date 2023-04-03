@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <title>Embraer App</title>
+  <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
+</head>
+
+  <body>
+
+    <style>
+       ::-webkit-scrollbar{
+          width: 15px;
+       }
+       ::-webkit-scrollbar-track{
+          background: white;
+          border-radius: 30px;
+       }
+       ::-webkit-scrollbar-thumb{
+          background: rgb(1, 70, 152);
+          border-radius: 30px;
+       }
+       .bg-primary2 {
+          background-color: rgb(1, 70, 152);
+      }
+      .btn-primary {
+          color: #fff;
+          background-color: rgb(1, 70, 152);
+          border-color: #fff;
+      }
+    </style>
+    
+
+    <div id="app">
+      
+    </div>
+    
+    <script>
+      
+      new Vue({
+        
+        el: "#app",
+        template:`
+        
+        <div class="container">
+      <div class="row mt-5 justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-header bg-primary2 text-white">
+              <h5 class="font-weight-bold mb-0">EMBRAER APP</h5>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="chassi" class="font-weight-bold">Chassi:</label>
+                <div class="input-group">
+                  <input v-model="idChassi" type="text" class="form-control">
+                  <div class="input-group-append">
+                    <button @click="search" class="btn btn-primary" type="button">Search</button>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped mt-4">
+                  <thead class="bg-primary2 text-white">
+                    <tr>
+                      <th class="text-center">Item</th>
+                      <th class="text-center">Installed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(nome,index) in nomes" :key="nomes.idItem">
+                      <td class="text-center">{{ nomes[index].nome }}</td>
+                      <td class="text-center">{{ nomes[index].status }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        `,
+        
+        data: {
+          
+          items: [
+            { id: 1, name: "Item 1", yes: "Yes", no: "No" },
+            { id: 2, name: "Item 2", yes: "Yes", no: "No" },
+            { id: 3, name: "Item 3", yes: "Yes", no: "No" },
+          ],
+          nomes:[],
+          idChassi: null
+        },
+        methods: {
+          search() {
+            axios
+              .get('http://localhost:8080/logica?idChassi=' + this.idChassi)
+              .then(response => {
+                this.nomes = response.data;
+                console.log(response.data)
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          },
+          downloadPdf() {
+            const element = document.getElementById("pdf"); // seleciona o elemento a ser convertido
+            const opt = {
+              margin:       1,
+              filename:     'test.pdf',
+              image:        { type: 'jpeg', quality: 1 },
+              html2canvas:  { scale: 2 },
+              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().from(element).set(opt).save();
+          }
+
+
+}
+
+        
+      });
+    </script>
+</body>
+</html>
