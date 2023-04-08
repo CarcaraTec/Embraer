@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="56bcae1e-29d9-4276-b5be-3331493d34bc" name="Changes" comment="" />
+    <list default="true" id="56bcae1e-29d9-4276-b5be-3331493d34bc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/.vscode/extensions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/assets/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/assets/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/assets/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/assets/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/assets/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/assets/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/HelloWorld.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/HelloWorld.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/TheWelcome.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/TheWelcome.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/WelcomeItem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/WelcomeItem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/icons/IconCommunity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/icons/IconCommunity.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/icons/IconDocumentation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/icons/IconDocumentation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/icons/IconEcosystem.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/icons/IconEcosystem.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/icons/IconSupport.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/icons/IconSupport.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/components/icons/IconTooling.vue" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/components/icons/IconTooling.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/vue-app/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/src/main/resources/templates/vue-app/vite.config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +50,11 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Igor/Documents/GitHub/Embraer/embraer/pom.xml&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\Documents\GitHub\Embraer\embraer\src\main\resources\templates" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
