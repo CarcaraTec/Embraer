@@ -17,7 +17,7 @@ public interface ChassiBoletimRepository extends JpaRepository<ChassiBoletim, In
   @Query(value = "INSERT INTO CHASSI_BOLETIM (ID_CHASSI, ID_BOLETIM, STATUS) VALUES (?1, ?2, ?3)", nativeQuery = true)
   void insertChassiBoletim(Integer idChassi, String idBoletim, String status);
 
-  @Query(value = "SELECT * FROM CHASSI_BOLETIM WHERE ID_CHASSI = ?1",nativeQuery = true)
+  @Query(value = "SELECT * FROM CHASSI_BOLETIM WHERE ID_CHASSI = ?1 ORDER BY ID_BOLETIM ASC",nativeQuery = true)
   List<ChassiBoletim> findBoletimByChassi(Integer idChassi);
 
   @Query(value = "SELECT * FROM CHASSI_BOLETIM WHERE ID_BOLETIM = ?1 AND ID_CHASSI = ?2",nativeQuery = true)

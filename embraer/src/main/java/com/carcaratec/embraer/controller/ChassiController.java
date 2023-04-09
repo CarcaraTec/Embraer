@@ -76,15 +76,6 @@ public class ChassiController {
         return listItemReturn;
     }
 
-//    @GetMapping("/teste")
-//    public String teste(@RequestParam ("idChassi") Integer idChassi){
-//        List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository
-//                .findBoletimByIdAndChassi(listLogica.get(x).getInput1(), idChassi);
-//        System.out.println(listChassiBoletim1.get(x).getStatus());
-//
-//        return "";
-//    }
-
     @PostMapping("/insertBoletim")
     public ResponseEntity<?> insertBoletim(@RequestBody BoletimServico boletimServico) {
         boletimServicoRepository.save(boletimServico);
@@ -123,6 +114,16 @@ public class ChassiController {
         }
 
         return ResponseEntity.ok(chassi);
+    }
+
+    @GetMapping("/save")
+    public String abc (@RequestParam("json") String json){
+
+        JSONObject jsonRefact = new JSONObject(json);
+
+
+        chassiRepository.save(json);
+        return "";
     }
 
 
