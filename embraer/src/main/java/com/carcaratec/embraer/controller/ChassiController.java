@@ -112,17 +112,14 @@ public class ChassiController {
             boletimServicoRepository.save(boletimServico);
             chassiBoletimRepository.insertChassiBoletim(chassiBoletim.getIdChassi(), chassiBoletim.getIdBoletim(), chassiBoletim.getStatus());
         }
-
         return ResponseEntity.ok(chassi);
     }
 
-    @GetMapping("/save")
+    @PostMapping("/saveChassi")
     public String abc (@RequestParam("json") String json){
 
         JSONObject jsonRefact = new JSONObject(json);
 
-
-        chassiRepository.save(json);
         return "";
     }
 

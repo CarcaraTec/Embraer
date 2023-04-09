@@ -132,6 +132,7 @@
               .catch(error => {
                 console.error(error);
               });
+        
           },
           save() {
             var tableData = [];
@@ -140,7 +141,7 @@
             var rows = this.$el.querySelector('#table-1').rows;
 
             // percorrer cada linha da tabela
-            for (var i = 0; i < rows.length; i++) {
+            for (var i = 1; i < rows.length; i++) {
                 var row = rows[i];
 
                 // criar um objeto com os dados da linha atual
@@ -150,19 +151,27 @@
                 "status2": $(row).find('td:eq(2) input').prop('checked'),
                 "status3": $(row).find('td:eq(3) input').prop('checked')
                 };
+                
 
+                if(this.nomes[(i-1)].status=="APPLICABLE"){
+                    if(rowData.status2==false){
+                        tableData.push(rowData);
+                    }
+                }
+
+                if(this.nomes[(i-1)].status=="INCORPORATED"){
+                    if(rowData.status1==false){
+                        tableData.push(rowData);
+                    }
+                }
                 // adicionar o objeto ao array de dados da tabela
-                tableData.push(rowData);
             }
+            console.log(this.nomes)
 
-            console.log(JSON.stringify(tableData));
+
+            console.log(tableData);
             }
-
-        
-
-}
-
-
+            }
         
       });
       
