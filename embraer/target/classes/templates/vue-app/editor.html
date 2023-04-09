@@ -123,6 +123,7 @@
         },
         methods: {
           search() {
+            this.nomes = [];
             axios
               .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
               .then(response => {

@@ -22,7 +22,8 @@ public interface ChassiBoletimRepository extends JpaRepository<ChassiBoletim, In
 
   @Query(value = "SELECT * FROM CHASSI_BOLETIM WHERE ID_BOLETIM = ?1 AND ID_CHASSI = ?2",nativeQuery = true)
   List<ChassiBoletim> findBoletimByIdAndChassi(String idBoletim, Integer idChassi);
-
+  @Transactional
+  @Modifying
   @Query(value = "UPDATE CHASSI_BOLETIM SET STATUS = ?1 WHERE ID_CHASSI = ?2 AND ID_BOLETIM = ?3",nativeQuery = true)
-  List<ChassiBoletim> updateChassi(String status,Integer idChassi,String idBoletim);
+  void updateChassi(String status,Integer idChassi,String idBoletim);
   }

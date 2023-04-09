@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,9 +118,9 @@ public class ChassiController {
     }
 
     @PostMapping("/saveChassi")
-    public String abc (@RequestBody String json0){
+    public String abc (@RequestBody String json0) {
         JSONArray jsonRefact = new JSONArray(json0);
-        for(int i = 0;i<jsonRefact.length();i++){
+        for (int i = 0; i < jsonRefact.length(); i++) {
             //System.out.println(jsonRefact.get(i));
             JSONObject json = new JSONObject(jsonRefact.get(i).toString());
             Integer idChassi = json.getInt("idChassi");
@@ -127,10 +128,11 @@ public class ChassiController {
             boolean status1 = (boolean) json.get("status1");
             boolean status2 = (boolean) json.get("status2");
             String status = "";
-
-            if(status1=true){
+            System.out.println(status2);
+            if (status1 == true) {
                 status = ("INCORPORATED");
-            }else if(status2=true){
+            }
+            if (status2 == true) {
                 status = ("APPLICABLE");
             }
 
@@ -138,13 +140,10 @@ public class ChassiController {
             System.out.println(idChassi);
             System.out.println(status);
 
-            //chassiBoletimRepository.updateChassi(status,idChassi,idBoletim);
+            chassiBoletimRepository.updateChassi(status, idChassi, idBoletim);
         }
-
-
-        return "";
-    }
-
+            return "";
+        }
 
 
 }
