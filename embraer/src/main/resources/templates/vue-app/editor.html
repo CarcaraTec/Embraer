@@ -146,11 +146,13 @@
 
                 // criar um objeto com os dados da linha atual
                 var rowData = {
+                "idChassi":this.nomes[(i-1)].idChassi,
                 "idBoletim": $(row).find('td:eq(0)').text(),
                 "status1": $(row).find('td:eq(1) input').prop('checked'),
                 "status2": $(row).find('td:eq(2) input').prop('checked'),
                 "status3": $(row).find('td:eq(3) input').prop('checked')
                 };
+
                 
 
                 if(this.nomes[(i-1)].status=="APPLICABLE"){
@@ -166,10 +168,14 @@
                 }
                 // adicionar o objeto ao array de dados da tabela
             }
-            console.log(this.nomes)
-
-
-            console.log(tableData);
+            console.log(tableData)
+            axios.post('http://localhost:8080/saveChassi', tableData)
+              .then(response => {
+              console.log(response.data);
+              })
+              .catch(error => {
+              console.error(error);
+              });
             }
             }
         

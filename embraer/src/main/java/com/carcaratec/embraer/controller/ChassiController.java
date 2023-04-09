@@ -6,6 +6,7 @@ import com.carcaratec.embraer.repository.*;
 import com.carcaratec.embraer.service.LogicControl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -116,9 +117,30 @@ public class ChassiController {
     }
 
     @PostMapping("/saveChassi")
-    public String abc (@RequestParam("json") String json){
+    public String abc (@RequestBody String json0){
+        JSONArray jsonRefact = new JSONArray(json0);
+        for(int i = 0;i<jsonRefact.length();i++){
+            //System.out.println(jsonRefact.get(i));
+            JSONObject json = new JSONObject(jsonRefact.get(i).toString());
+            Integer idChassi = json.getInt("idChassi");
+            String idBoletim = json.get("idBoletim").toString();
+            boolean status1 = (boolean) json.get("status1");
+            boolean status2 = (boolean) json.get("status2");
+            String status = "";
 
-        JSONObject jsonRefact = new JSONObject(json);
+            if(status1=true){
+                status = ("INCORPORATED");
+            }else if(status2=true){
+                status = ("APPLICABLE");
+            }
+
+            System.out.println(idBoletim);
+            System.out.println(idChassi);
+            System.out.println(status);
+
+            //chassiBoletimRepository.updateChassi(status,idChassi,idBoletim);
+        }
+
 
         return "";
     }

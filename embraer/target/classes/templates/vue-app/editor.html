@@ -79,12 +79,12 @@
                   <input v-model="idChassi" type="text" class="form-control">
                   <div class="input-group-append">
                     <button @click="search" class="btn btn-primary" type="button">Search</button>
-                    
+                    <button @click="save" class="btn btn-primary" type="button">Save</button>
                   </div>
                 </div>
               </div>
               <div class="table-responsive">
-                <table class="table table-bordered table-striped mt-4">
+                <table id="table-1" class="table table-bordered table-striped mt-4">
                   <thead class="bg-primary2 text-white">
                     <tr>
                       <th class="text-center">SB</th>
@@ -96,9 +96,9 @@
                   <tbody>
                     <tr v-for="(nome,index) in nomes">
                       <td class="text-center">{{ nomes[index].idBoletim }}</td>
-                      <td align="center"><input type="checkbox" v-bind:checked="nomes[index].status === 'INCORPORATED'" id="statusCheckbox"></td>
-                      <td align="center"><input type="checkbox" v-bind:checked="nomes[index].status === 'APPLICABLE'" id="statusCheckbox"></td>
-                      <td align="center"><input type="checkbox" id="statusCheckbox"></td>
+                      <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'INCORPORATED'" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
+                      <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'APPLICABLE'" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
+                      <td align="center"><input type="radio" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -132,27 +132,59 @@
               .catch(error => {
                 console.error(error);
               });
-          },
-          downloadPdf() {
-            const element = document.getElementById("pdf"); // seleciona o elemento a ser convertido
-            const opt = {
-              margin:       1,
-              filename:     'test.pdf',
-              image:        { type: 'jpeg', quality: 1 },
-              html2canvas:  { scale: 2 },
-              jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-
-            html2pdf().from(element).set(opt).save();
-          }
         
+          },
+          save() {
+            var tableData = [];
 
-}
+            // obter todas as linhas da tabela populada pelo Vue
+            var rows = this.$el.querySelector('#table-1').rows;
 
+            // percorrer cada linha da tabela
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
 
+                // criar um objeto com os dados da linha atual
+                var rowData = {
+                "idChassi":this.nomes[(i-1)].idChassi,
+                "idBoletim": $(row).find('td:eq(0)').text(),
+                "status1": $(row).find('td:eq(1) input').prop('checked'),
+                "status2": $(row).find('td:eq(2) input').prop('checked'),
+                "status3": $(row).find('td:eq(3) input').prop('checked')
+                };
+
+                
+
+                if(this.nomes[(i-1)].status=="APPLICABLE"){
+                    if(rowData.status2==false){
+                        tableData.push(rowData);
+                    }
+                }
+
+                if(this.nomes[(i-1)].status=="INCORPORATED"){
+                    if(rowData.status1==false){
+                        tableData.push(rowData);
+                    }
+                }
+                // adicionar o objeto ao array de dados da tabela
+            }
+            console.log(tableData)
+            axios.post('http://localhost:8080/saveChassi', tableData)
+              .then(response => {
+              console.log(response.data);
+              })
+              .catch(error => {
+              console.error(error);
+              });
+            }
+            }
         
       });
       
+    </script>
+
+    <script>
+        
     </script>
 </body>
 </html>
