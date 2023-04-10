@@ -13,8 +13,8 @@ public class Item {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "DESCRICAO")
-    private String descricao;
+    @Column(name = "CATEGORIA")
+    private String categoria;
 
     public Integer getIdItem() {
         return idItem;
@@ -32,11 +32,11 @@ public class Item {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
