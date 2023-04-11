@@ -60,6 +60,8 @@ public class LogicControl {
 
             for (LogicaBoletim logicaBoletim : listLogicaBoletim) {
 
+
+
                 Integer idItem = item.getIdItem();
                 String nomeItem = item.getNome();
                 String statusItem1 = "null";
@@ -115,8 +117,11 @@ public class LogicControl {
                         itemReturn.setStatus("❌");
                     }
                 }
+                if(listItemReturn.contains(itemReturn)){
+
+                }else {
                 listItemReturn.add(itemReturn);
-            }
+            }}
         }
         return listItemReturn;
     }
