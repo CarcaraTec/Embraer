@@ -145,5 +145,17 @@ public class ChassiController {
             return "";
         }
 
+        @GetMapping("/category")
+        public List<String> category(){
+        List<String>category = itemRepository.findCategory();
+        return category;    
+        }
+
+        @GetMapping("/findByCategory")
+        public List<Item> findByCategory(@RequestParam("category") String category){
+            List<Item> findByCategoria = itemRepository.findByCategoria(category);
+            return findByCategoria;
+        }
+
 
 }
