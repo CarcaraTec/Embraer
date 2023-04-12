@@ -3,7 +3,7 @@ package com.carcaratec.embraer.controller;
 import com.carcaratec.embraer.dataImporter.LoadData;
 import com.carcaratec.embraer.model.*;
 import com.carcaratec.embraer.repository.*;
-import com.carcaratec.embraer.service.LogicControl;
+import com.carcaratec.embraer.dataImporter.service.LogicControl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.json.JSONArray;
@@ -13,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
 import java.util.List;
 
 

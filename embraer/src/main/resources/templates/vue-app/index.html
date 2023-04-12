@@ -85,19 +85,13 @@
                     <button @click="search" class="btn btn-primary" type="button">Search</button>
                     
                   </div>
-                </div>
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Selecione uma opção
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Opção 1</a>
-                    <a class="dropdown-item" href="#">Opção 2</a>
-                    <a class="dropdown-item" href="#">Opção 3</a>
-                  </div>
-                </div>
-
               </div>
+            </div>
+                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>Open this select menu</option>
+                    <option v-for="(cat, index) in category" :value="index" :key="index">{{ cat }}</option>
+                  </select>
+                </div>
               <div class="table-responsive">
                 <table class="table table-bordered table-striped mt-4">
                   <thead class="bg-primary2 text-white">
@@ -129,6 +123,7 @@
             { id: 3, name: "Item 3", yes: "Yes", no: "No" },
           ],
           nomes:[],
+          category:[],
           idChassi: null
         },
         methods: {
@@ -137,6 +132,16 @@
               .get('http://localhost:8080/logica?idChassi=' + this.idChassi)
               .then(response => {
                 this.nomes = response.data;
+                console.log(response.data)
+              })
+              .catch(error => {
+                console.error(error);
+              });
+
+              axios
+              .get('http://localhost:8080/category')
+              .then(response => {
+                this.category = response.data;
                 console.log(response.data)
               })
               .catch(error => {

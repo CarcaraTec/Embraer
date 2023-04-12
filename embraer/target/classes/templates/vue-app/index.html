@@ -10,6 +10,7 @@
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
 
   <title>Embraer App</title>
   <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
@@ -38,19 +39,26 @@
        }
        .bg-primary2 {
           background-color: rgb(11, 27, 91);
-      }
-      .btn-primary {
+       }
+       .btn-primary {
           color: #fff;
           background-color: rgb(11, 27, 91);
           border-color: #fff;
-      }
-      .logo-container {
+       }
+       .logo-container {
           background-color: rgb(11, 27, 91);
           color: #FFF;
-      }
+       }
        .btn btn-outline-dark {
+       }
+       .btn-secondary {
+          background-color: rgb(11, 27, 91);
+       }
+       .dropdown-item.active {
+          background-color: #007bff;
+          color: #fff;
+       }
 
-      }
     </style>
 
     <div id="app"></div>
@@ -78,7 +86,16 @@
                     
                   </div>
                 </div>
-                <div>é aqui que coloca!!!!</div>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle mt-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Selecione uma opção
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Opção 1</a>
+                    <a class="dropdown-item" href="#">Opção 2</a>
+                    <a class="dropdown-item" href="#">Opção 3</a>
+                  </div>
+                </div>
 
               </div>
               <div class="table-responsive">

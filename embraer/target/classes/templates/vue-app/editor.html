@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
   <title>Embraer App</title>
   <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
 
-  </head>
+</head>
 
-  <body>
+<body>
 
   <div class="logo-container p-3 d-flex justify-content-between">
     <a href="home.html"><button class="btn btn-primary my-sm-0">Home</button></a>
@@ -24,46 +26,48 @@
     <span>logout</span>
   </div>
 
-    <style>
-       ::-webkit-scrollbar{
-          width: 15px;
-       }
-       ::-webkit-scrollbar-track{
-          background: Gainsboro;
-          border-radius: 30px;
-       }
-       ::-webkit-scrollbar-thumb{
-          background: rgb(11, 27, 91);
-          border-radius: 30px;
-       }
-       .bg-primary2 {
-          background-color: rgb(11, 27, 91);
-      }
-      .btn-primary {
-          color: #fff;
-          background-color: rgb(11, 27, 91);
-          border-color: #fff;
-      }
-      .logo-container {
-          background-color: rgb(11, 27, 91);
-          color: #FFF;
-      }
-       .btn btn-outline-dark {
+  <style>
+    ::-webkit-scrollbar {
+      width: 15px;
+    }
 
-      }
-    </style>
-    
+    ::-webkit-scrollbar-track {
+      background: Gainsboro;
+      border-radius: 30px;
+    }
 
-    <div id="app">
-      
-    </div>
-    
-    <script>
-      
-      new Vue({
-        
-        el: "#app",
-        template:`
+    ::-webkit-scrollbar-thumb {
+      background: rgb(11, 27, 91);
+      border-radius: 30px;
+    }
+
+    .bg-primary2 {
+      background-color: rgb(11, 27, 91);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: rgb(11, 27, 91);
+      border-color: #fff;
+    }
+
+    .logo-container {
+      background-color: rgb(11, 27, 91);
+      color: #FFF;
+    }
+
+    .btn btn-outline-dark {}
+  </style>
+
+
+  <div id="app"></div>
+
+  <script>
+
+    new Vue({
+
+      el: "#app",
+      template: `
         
         <div class="container">
       <div class="row mt-5 justify-content-center">
@@ -79,8 +83,37 @@
                   <input v-model="idChassi" type="text" class="form-control">
                   <div class="input-group-append">
                     <button @click="search" class="btn btn-primary" type="button">Search</button>
-                    <button @click="save" class="btn btn-primary" type="button">Save</button>
-                  </div>
+                    <button @click="save" class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modificações:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <table class="table table-bordered table-striped mt-4">
+                                <tr>
+                                  <th class="text-center">SB</th>
+                                  <th class="text-center">MUDANÇA</th>
+                                </tr>
+                                <tr v-for="(mudanca,index) in mudancas">
+                                  <td class="text-center">{{ mudancas[index].SB }}</td>
+                                  <td class="text-center">{{ mudancas[index].MUDANCA }}</td>
+                                </tr>
+                            </table>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" @click="alter" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    </div>
                 </div>
               </div>
               <div class="table-responsive">
@@ -108,84 +141,94 @@
         </div>
       </div>
     </div>
+
+        
         `,
-        
-        data: {
-          
-          items: [
-            { id: 1, name: "Item 1", yes: "Yes", no: "No" },
-            { id: 2, name: "Item 2", yes: "Yes", no: "No" },
-            { id: 3, name: "Item 3", yes: "Yes", no: "No" },
-          ],
-          nomes:[],
-          idChassi: null
-          
-        },
-        methods: {
-          search() {
-            this.nomes = [];
-            axios
-              .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
-              .then(response => {
-                this.nomes = response.data;
-                console.log(response.data)
-              })
-              .catch(error => {
-                console.error(error);
-              });
-        
-          },
-          save() {
-            var tableData = [];
 
-            // obter todas as linhas da tabela populada pelo Vue
-            var rows = this.$el.querySelector('#table-1').rows;
+      data: {
 
-            // percorrer cada linha da tabela
-            for (var i = 1; i < rows.length; i++) {
-                var row = rows[i];
+        items: [
+          { id: 1, name: "Item 1", yes: "Yes", no: "No" },
+          { id: 2, name: "Item 2", yes: "Yes", no: "No" },
+          { id: 3, name: "Item 3", yes: "Yes", no: "No" },
+        ],
+        nomes: [],
+        idChassi: null,
+        mudancas: [],
+        tableData: []
 
-                // criar um objeto com os dados da linha atual
-                var rowData = {
-                "idChassi":this.nomes[(i-1)].idChassi,
-                "idBoletim": $(row).find('td:eq(0)').text(),
-                "status1": $(row).find('td:eq(1) input').prop('checked'),
-                "status2": $(row).find('td:eq(2) input').prop('checked'),
-                "status3": $(row).find('td:eq(3) input').prop('checked')
-                };
-
-                
-
-                if(this.nomes[(i-1)].status=="APPLICABLE"){
-                    if(rowData.status2==false){
-                        tableData.push(rowData);
-                    }
-                }
-
-                if(this.nomes[(i-1)].status=="INCORPORATED"){
-                    if(rowData.status1==false){
-                        tableData.push(rowData);
-                    }
-                }
-                // adicionar o objeto ao array de dados da tabela
-            }
-            console.log(tableData)
-            axios.post('http://localhost:8080/saveChassi', tableData)
-              .then(response => {
-              console.log(response.data);
-              })
-              .catch(error => {
+      },
+      methods: {
+        search() {
+          this.nomes = [];
+          axios
+            .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
+            .then(response => {
+              this.nomes = response.data;
+              console.log(response.data)
+            })
+            .catch(error => {
               console.error(error);
-              });
-            }
-            }
-        
-      });
-      
-    </script>
+            });
 
-    <script>
-        
-    </script>
+        },
+        save() {
+
+          // obter todas as linhas da tabela populada pelo Vue
+          var rows = this.$el.querySelector('#table-1').rows;
+
+          // percorrer cada linha da tabela
+          for (var i = 1; i < rows.length; i++) {
+            var row = rows[i];
+
+            // criar um objeto com os dados da linha atual
+            var rowData = {
+              "idChassi": this.nomes[(i - 1)].idChassi,
+              "idBoletim": $(row).find('td:eq(0)').text(),
+              "status1": $(row).find('td:eq(1) input').prop('checked'),
+              "status2": $(row).find('td:eq(2) input').prop('checked'),
+              "status3": $(row).find('td:eq(3) input').prop('checked')
+            };
+
+
+
+            if (this.nomes[(i - 1)].status == "APPLICABLE") {
+              if (rowData.status2 == false) {
+
+                let json = '{"SB":"' + rowData.idBoletim + '","MUDANCA":"APPLICABLE ➜ INCORPORATED"}'
+
+                this.mudancas.push(JSON.parse(json))
+                this.tableData.push(rowData);
+              }
+            }
+
+            if (this.nomes[(i - 1)].status == "INCORPORATED") {
+              if (rowData.status1 == false) {
+                let json = '{"SB":"'+rowData.idBoletim+'","MUDANCA":"INCORPORATED ➜ APPLICABLE"}'
+                this.mudancas.push(JSON.parse(json))
+                this.tableData.push(rowData);
+              }
+            }
+            // adicionar o objeto ao array de dados da tabela
+          }
+        },
+
+        alter(){
+          console.log(this.mudancas)
+          axios.post('http://localhost:8080/saveChassi', this.tableData)
+            .then(response => {
+              console.log(response.data);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      }
+
+    });
+
+  </script>
+
 </body>
+
 </html>
