@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/c9fd3db041.js" crossorigin="anonymous"></script>
 
     <title>Embraer App</title>
     <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
@@ -20,6 +21,13 @@
         }
         .btn-group button {
             margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fa-solid {
+          margin-right: 20px;
+          margin-left: 20px;
         }
 
 
@@ -29,26 +37,20 @@
 
     <body>
         <div class="logo-container p-3 d-flex justify-content-between">
-            <span class="logo mt-1">EMBRAER</span>
-            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+            <span></span>
+            <img src="logo.embraer.png">
+            <div>
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user mt-2"></i>
+            </div>
+        </div>
+        <div class="container">
+            <div class="btn-group btn-group-sm mt-" role="group" aria-label="Small button group">
                 <a href="index.html"><button type="button" class="btn btn-primary my-sm-0">Chassi</button></a>
                 <a href="index.html"><button type="button" class="btn btn-primary my-sm-0">Middle</button></a>
                 <a href="index.html"><button type="button" class="btn btn-primary my-sm-0">Right</button></a>
             </div>
-            <span>logout</span>
         </div>
     </body>
-
-<style>
-    div {
-        max-width: 100%;
-        height: 100%;
-    }
-
-    img {
-        width: 100%;
-        height: 100$;
-    }
-</style>
 
 </html>
