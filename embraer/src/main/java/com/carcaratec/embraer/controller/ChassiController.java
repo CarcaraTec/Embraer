@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -146,7 +147,11 @@ public class ChassiController {
         @GetMapping("/category")
         public List<String> category(){
         List<String>category = itemRepository.findCategory();
-        return category;    
+        List<String>categoryFormated = new ArrayList<>();
+        for(int i = 0;i<category.size();i++){
+            categoryFormated.add(category.get(i).toString().toUpperCase());
+        }
+        return categoryFormated;
         }
 
         @GetMapping("/findByCategory")
