@@ -73,7 +73,13 @@ public class ChassiController {
     // Definição da rota para a requisição HTTP GET
     @GetMapping("/logica")
     public List<ItemReturn> logica(@RequestParam("idChassi") Integer idChassi) {
-        List<ItemReturn> listItemReturn = logicControl.itemsDeal(idChassi);
+        List<ItemReturn> listItemReturn = logicControl.itemsDeal(idChassi,"all");
+        return listItemReturn;
+    }
+
+    @GetMapping("/logicaByCategory")
+    public List<ItemReturn> logicaCategory(@RequestParam("idChassi") Integer idChassi,@RequestParam("category") String category) {
+        List<ItemReturn> listItemReturn = logicControl.itemsDeal(idChassi,category.toLowerCase());
         return listItemReturn;
     }
 
@@ -134,7 +140,6 @@ public class ChassiController {
             if (status2 == true) {
                 status = ("APPLICABLE");
             }
-
             System.out.println(idBoletim);
             System.out.println(idChassi);
             System.out.println(status);
@@ -159,6 +164,4 @@ public class ChassiController {
             List<Item> findByCategoria = itemRepository.findByCategoria(category);
             return findByCategoria;
         }
-
-
 }

@@ -93,7 +93,7 @@
               </div>
             </div>
                 <div>
-                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" @change="onSelectChange">
                     <option selected>Open this select menu</option>
                     <option v-for="(cat, index) in category" :value="index" :key="index">{{ cat }}</option>
                   </select>
@@ -165,8 +165,15 @@
             };
 
             html2pdf().from(element).set(opt).save();
+          },
+          onSelectChange(event) {
+                // Método que será chamado quando uma opção for selecionada
+            const selectedIndex = parseInt(event.target.value); // Converte o valor para inteiro
+            const selectedText = this.category[selectedIndex]; // Obtém o texto do item selecionado
+            // Faça o que desejar com o texto selecionado, por exemplo:
+            console.log("Texto selecionado:", selectedText);  
           }
-}
+        }
       });
     </script>
 </body>

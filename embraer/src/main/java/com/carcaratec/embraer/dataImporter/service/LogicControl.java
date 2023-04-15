@@ -30,10 +30,15 @@ public class LogicControl {
     @Autowired
     private LogicaFabricaRepository logicaFabricaRepository;
 
-    public List<ItemReturn> itemsDeal(Integer idChassi){
+    public List<ItemReturn> itemsDeal(Integer idChassi, String category){
         List<ItemReturn> listItemReturn = new ArrayList<>();
+        List<Item> listItem = new ArrayList<>();
 
-        List<Item> listItem = itemRepository.findAll();
+        if(category.equals("all")) {
+            listItem = itemRepository.findAll();
+        }else {
+            listItem = itemRepository.findByCategoria(category);
+        }
 
         for (Item item : listItem) {
             ItemReturn itemReturn = new ItemReturn();
