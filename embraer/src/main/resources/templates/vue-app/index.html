@@ -171,9 +171,15 @@
             this.nomes = [];
                 // Método que será chamado quando uma opção for selecionada
             const selectedIndex = parseInt(event.target.value); // Converte o valor para inteiro
-            const selectedText = this.category[selectedIndex]; // Obtém o texto do item selecionado
+            console.log(selectedIndex)
+            let selectedText = this.category[selectedIndex]; // Obtém o texto do item selecionado
             // Faça o que desejar com o texto selecionado, por exemplo:
             console.log("Texto selecionado:", selectedText);  
+
+            if(selectedText===undefined){
+              selectedText = "all"
+            }
+
             
             axios
               .get('http://localhost:8080/logicaByCategory?idChassi=' + this.idChassi +'&category='+selectedText)
