@@ -18,7 +18,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [x] **SPRINT 1** - 13/03/2023 a 02/04/2023
 
-- [ ] **SPRINT 2** - 03/04/2023 a 23/04/2023
+- [x] **SPRINT 2** - 03/04/2023 a 23/04/2023
 
 - [ ] **SPRINT 3** - 24/04/2023 a 14/05/2023
 
