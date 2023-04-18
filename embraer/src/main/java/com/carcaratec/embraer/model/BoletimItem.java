@@ -3,11 +3,9 @@ package com.carcaratec.embraer.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "BOLETIM_ITEM")
 public class BoletimItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_boletim", nullable = false, length = 50)
     private String idBoletim;
 

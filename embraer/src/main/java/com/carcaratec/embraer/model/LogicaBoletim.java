@@ -3,7 +3,7 @@ package com.carcaratec.embraer.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "LOGICA")
+@Table(name = "LOGICA_BOLETIM")
 public class LogicaBoletim {
 
     @Column(name = "ID_LOGICA", nullable = false)

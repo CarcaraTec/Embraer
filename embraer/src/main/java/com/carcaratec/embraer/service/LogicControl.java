@@ -30,10 +30,15 @@ public class LogicControl {
     @Autowired
     private LogicaFabricaRepository logicaFabricaRepository;
 
-    public List<ItemReturn> itemsDeal(Integer idChassi){
+    public List<ItemReturn> itemsDeal(Integer idChassi, String category){
         List<ItemReturn> listItemReturn = new ArrayList<>();
+        List<Item> listItem = new ArrayList<>();
 
-        List<Item> listItem = itemRepository.findAll();
+        if(category.equals("all")) {
+            listItem = itemRepository.findAll();
+        }else {
+            listItem = itemRepository.findByCategoria(category);
+        }
 
         for (Item item : listItem) {
             ItemReturn itemReturn = new ItemReturn();
@@ -59,6 +64,8 @@ public class LogicControl {
             }
 
             for (LogicaBoletim logicaBoletim : listLogicaBoletim) {
+
+
 
                 Integer idItem = item.getIdItem();
                 String nomeItem = item.getNome();
@@ -115,8 +122,11 @@ public class LogicControl {
                         itemReturn.setStatus("❌");
                     }
                 }
+                if(listItemReturn.contains(itemReturn)){
+
+                }else {
                 listItemReturn.add(itemReturn);
-            }
+            }}
         }
         return listItemReturn;
     }
