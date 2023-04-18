@@ -8,11 +8,11 @@
 </h4>
 
 
-## Challenge
+## ✏️ **CHALLANGE**
 
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
-## Sprints schedule
+## 📅 **SPRINTS SCHEDULE**
 
 - [x] **Kickoff** - 13/02/2023 a 03/03/2023
 
@@ -24,23 +24,58 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
 
-- [ ] **Solutions fair** - 13/06/2023 and 14/06/2023 at 7pm
+- [ ] **Solutions fair** - 13/06/2023 - 14/06/2023 at 7pm
 
 
 
-## Backlog
+## 🎯 **BACKLOG**
 
-![productbacklog](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/PRODUCT%20BACKLOG.png)
-![backlogsprint](https://github.com/CarcaraTec/Embraer/blob/a8af8365b4137bd7149c2c41fc2816b86a881268/Documents/images/SPRINT%20BACKLOG%201.png)
+* **SPRINT 1**
+    * Modelagem de Banco de Dados 
+    * Criação do Bando de Dados em Cloud
+    * Tela de consulta/motorista com alguns opcionais    
 
-## Data Modeling
+* **SPRINT 2**
+   * Aprimorar tela consulta/motorista
+   * Iniciar tela editor
+   * Aplicação web e mobile com responsividade
+   * Revisão das regras do banco de dados (views, funções, procedures)
+
+* **SPRINT 3**
+  * Gerar PDF na plataforma
+  * Inserir notificação no sistema
+  * Manual de Usuário
+
+* **SPRINT 4**
+  * Auditoria
+  * Criação de perfis de acesso (admin, editor e motorista)
+  * Login com SSO
+  * Desenvolvimento de Push Notification
+
+## 📔**REQUISITOS FUNCIONAIS X REQUISITOS NÃO FUNCIONAIS**
+
+* **Requisitos Funcionais:**
+ •	Utilização de API’s para futura integração com sistemas em plataforma mobile 
+ •	Acesso à base de dados de clientes (usuário, senha e equipamento) 
+ •	Usuários devem ter perfis diferentes (administrador, edição e consulta) 
+    **Administrador (Embraer):** permissão para criar, modificar e remover clientes; modificar e inserir/remover novos itens à base de dados apresentadas aos clientes; inserir notificações de atualizações; gerar visibilidade estatística dos clientes, para oportunidade de vendas de opcionais. 
+     **Edição:** permissão de escrita da lista de SB’s da aeronave cujo cliente é o dono. 
+    	**Consulta:** permissão de visualização da lista de itens opcionais da aeronave. 
+ •	Possibilidade de aplicação de filtros de seleção (por categoria de item) 
+ •	Visualização de arquivos PDF no App e possibilidade de exportação no mesmo formato, com registro da data de geração do arquivo e do usuário. 
+
+* **Requisitos Não Funcionais:**
+
+
+
+## 🤓**DATA MODELING**
 ![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
 
-## Burndown
+## 📉**BURNDOWN**
 
 ![burndown](https://github.com/CarcaraTec/Embraer/blob/8af2515751a1603a8bf08410334d8766e8e8ce9a/Documents/images/BURNDOWN%20EMBRAER%201.png)
 
-## Technology and tools
+## 💻**TECHNOLOGY AND TOOLS**
 
 <details>
 <summary>Back-End</summary>
@@ -70,7 +105,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 </details>
 
-## Team
+## 👪 **TEAM**
 
 ![team](https://github.com/CarcaraTec/Embraer/blob/6c43e6e09e3922b10e031b7ae7a109ea76949c12/Documents/images/Team.png)
 
