@@ -1,0 +1,8 @@
+-- view que retorna o caminho hierarquico das logicas
+CREATE VIEW v_hierarquia AS SELECT id_logica, id_Item, input1, operacao,  input2, dependencia,  LEVEL AS nivel, 
+CONNECT_BY_ROOT(ID_logica) AS no_raiz, SYS_CONNECT_BY_PATH(ID_logica, '/') AS caminho_hierarquia
+FROM Logica_Boletim
+START WITH dependencia IS NULL
+CONNECT BY PRIOR ID_logica = dependencia;
+
+

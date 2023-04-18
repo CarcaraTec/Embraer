@@ -1,0 +1,72 @@
+CREATE OR REPLACE PACKAGE fabrica AS
+  FUNCTION verificar_instalacao_fabrica(p_id_chassi IN NUMBER, p_id_item IN NUMBER) RETURN NUMBER;
+  PROCEDURE verificar_e_inserir_instalacao_fabrica;
+END fabrica;
+/
+
+create or replace PACKAGE BODY fabrica AS
+  FUNCTION verificar_instalacao_fabrica(p_id_chassi IN NUMBER, p_id_item IN NUMBER) RETURN NUMBER AS
+    chassi_minimo NUMBER;
+    chassi_atual NUMBER;
+    result NUMBER;
+  BEGIN
+    SELECT TO_NUMBER(lf.chassi_minimo) INTO chassi_minimo
+    FROM logica_fabrica lf
+    WHERE lf.id_item = p_id_item
+      AND ROWNUM = 1;
+
+    SELECT TO_NUMBER(p_id_chassi) INTO chassi_atual
+    FROM chassi
+    WHERE id_chassi = p_id_chassi
+      AND ROWNUM = 1;
+
+    IF chassi_atual > chassi_minimo THEN
+        result := 1;
+        DBMS_OUTPUT.PUT_LINE('Resultado: ' || result);
+    ELSE
+        result := 0;
+        DBMS_OUTPUT.PUT_LINE('Resultado: ' || result);
+    END IF;
+
+    RETURN result;
+  END;
+
+PROCEDURE verificar_e_inserir_instalacao_fabrica AS
+  v_chassi chassi.id_chassi%TYPE;
+  v_item logica_fabrica.id_item%TYPE;
+  v_instalado NUMBER;
+BEGIN
+  FOR r_chassi IN (SELECT id_chassi FROM chassi) LOOP
+    FOR r_item IN (SELECT id_item FROM logica_fabrica) LOOP
+      v_instalado := verificar_instalacao_fabrica(r_chassi.id_chassi, r_item.id_item);
+      MERGE INTO chassi_item ci
+      USING (
+        SELECT r_chassi.id_chassi AS id_chassi, r_item.id_item AS id_item, v_instalado AS instalado
+        FROM dual
+      ) temp
+      ON (
+        ci.id_chassi = temp.id_chassi AND ci.id_item = temp.id_item
+      )
+      WHEN MATCHED THEN
+        UPDATE SET ci.instalado = temp.instalado
+      WHEN NOT MATCHED THEN
+        INSERT (id_chassi, id_item, instalado)
+        VALUES (temp.id_chassi, temp.id_item, temp.instalado);
+    END LOOP;
+  END LOOP;
+END;
+END fabrica;
+/
+
+
+
+SET SERVEROUTPUT ON;
+DECLARE
+    result NUMBER;
+BEGIN
+    result := fabrica.verificar_instalacao_fabrica(10000076, 12);
+END;
+
+BEGIN
+  fabrica.verificar_e_inserir_instalacao_fabrica;
+END;
