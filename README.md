@@ -8,11 +8,11 @@
 </h4>
 
 
-## Challenge
+## :pencil2: **CHALLANGE**
 
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
-## Sprints schedule
+## :date: **SPRINTS SCHEDULE**
 
 - [x] **Kickoff** - 13/02/2023 a 03/03/2023
 
@@ -24,14 +24,22 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
 
-- [ ] **Solutions fair** - 13/06/2023 and 14/06/2023 at 7pm
+- [ ] **Solutions fair** - 13/06/2023 - 14/06/2023 at 7pm
 
 
 
-## Backlog
+## :dart: Backlog
 
-![productbacklog](https://github.com/CarcaraTec/Embraer/blob/256b256636fbda7ec1a58565c39b590a9ff4269c/Documents/images/PRODUCT%20BACKLOG.png)
-![backlogsprint](https://github.com/CarcaraTec/Embraer/blob/a8af8365b4137bd7149c2c41fc2816b86a881268/Documents/images/SPRINT%20BACKLOG%201.png)
+* **SPRINT 1**
+
+* **SPRINT 2**
+
+* **SPRINT 3**
+
+* **SPRINT 4**
+
+
+SPRINT 1 
 
 ## Data Modeling
 ![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
