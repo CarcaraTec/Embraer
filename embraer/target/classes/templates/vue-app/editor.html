@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -13,20 +13,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://kit.fontawesome.com/c9fd3db041.js" crossorigin="anonymous"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
   <title>Embraer App</title>
   <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
 </head>
 
 <body>
 
-<div class="logo-container p-3 d-flex justify-content-between">
-  <a href="home.html"><i class="fa-solid fa-house mt-2"></i></a>
-  <img src="logo.embraer.png">
-  <div>
-    <i class="fa-solid fa-bell"></i>
-    <i class="fa-solid fa-user mt-2"></i>
+  <div class="logo-container p-3 d-flex justify-content-between">
+    <a href="home.html"><i class="fa-solid fa-house mt-2"></i></a>
+    <img src="logo.embraer.png">
+    <div>
+      <i class="fa-solid fa-bell"></i>
+      <i class="fa-solid fa-user mt-2"></i>
+    </div>
   </div>
-</div>
 
   <style>
     ::-webkit-scrollbar {
@@ -52,10 +55,12 @@
       background-color: rgb(11, 27, 91);
       border-color: #fff;
     }
+
     .logo-container {
       background-color: rgb(11, 27, 91);
       color: #FFF;
     }
+
     .fa-solid {
       margin-right: 20px;
       margin-left: 20px;
@@ -65,7 +70,11 @@
   </style>
 
 
-  <div id="app"></div>
+  <div id="app">
+    
+  </div>
+
+
 
   <script>
 
@@ -73,13 +82,12 @@
 
       el: "#app",
       template: `
-        
-        <div class="container">
+      <div class="container">
       <div class="row mt-5 justify-content-center">
         <div class="col-md-8">
           <div class="card shadow">
             <div class="card-header bg-primary2 text-white">
-              <h5 class="font-weight-bold mb-0">EMBRAER APP</h5>
+              <h5 class="font-weight-bold mb-0">EMBRAER</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
@@ -88,10 +96,12 @@
                   <input v-model="idChassi" type="text" class="form-control">
                   <div class="input-group-append">
                     <button @click="search" class="btn btn-primary" type="button">Search</button>
-                    <button @click="save" class="btn btn-primary" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
+                    <button @click="save" class="btn btn-primary" type="button" data-bs-toggle="modal"
+                      data-bs-target="#exampleModal">Save</button>
 
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -100,14 +110,14 @@
                           </div>
                           <div class="modal-body">
                             <table class="table table-bordered table-striped mt-4">
-                                <tr>
-                                  <th class="text-center">SB</th>
-                                  <th class="text-center">MUDANÇA</th>
-                                </tr>
-                                <tr v-for="(mudanca,index) in mudancas">
-                                  <td class="text-center">{{ mudancas[index].SB }}</td>
-                                  <td class="text-center">{{ mudancas[index].MUDANCA }}</td>
-                                </tr>
+                              <tr>
+                                <th class="text-center">SB</th>
+                                <th class="text-center">MUDANÇA</th>
+                              </tr>
+                              <tr v-for="(mudanca,index) in mudancas">
+                                <td class="text-center">{{ mudancas[index].SB }}</td>
+                                <td class="text-center">{{ mudancas[index].MUDANCA }}</td>
+                              </tr>
                             </table>
                           </div>
                           <div class="modal-footer">
@@ -117,34 +127,56 @@
                         </div>
                       </div>
                     </div>
-                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="table-responsive">
-                <table id="table-1" class="table table-bordered table-striped mt-4">
-                  <thead class="bg-primary2 text-white">
-                    <tr>
-                      <th class="text-center">SB</th>
-                      <th class="text-center">Incorporated</th>
-                      <th class="text-center">Applicable</th>
-                      <th class="text-center">Not Applicable</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr v-for="(nome,index) in nomes">
-                      <td class="text-center">{{ nomes[index].idBoletim }}</td>
-                      <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'INCORPORATED'" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
-                      <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'APPLICABLE'" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
-                      <td align="center"><input type="radio" id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
-                    </tr>
-                  </tbody>
-                </table>
+                <table>
+                <tr>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="checkbox1" @click="incorporatedFunction">
+                      <label class="form-check-label" for="checkbox1">Default switch checkbox input 1</label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="checkbox2" @click="applicableFunction">
+                      <label class="form-check-label" for="checkbox2">Default switch checkbox input 2</label>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+                <div class="table-responsive">
+                  <table id="table-1" class="table table-bordered table-striped mt-4">
+                    <thead class="bg-primary2 text-white">
+                      <tr>
+                        <th class="text-center">SB</th>
+                        <th class="text-center">Incorporated</th>
+                        <th class="text-center">Applicable</th>
+                        <th class="text-center">Not Applicable</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(nome,index) in nomes">
+                        <td class="text-center">{{ nomes[index].idBoletim }}</td>
+                        <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'INCORPORATED'"
+                            id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
+                        <td align="center"><input type="radio" v-bind:checked="nomes[index].status === 'APPLICABLE'"
+                            id="statusCheckbox" v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
+                        <td align="center"><input type="radio" id="statusCheckbox"
+                            v-bind:name="'statusRadio'+nomes[index].idBoletim"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+        
+        
 
         
         `,
@@ -159,22 +191,70 @@
         nomes: [],
         idChassi: null,
         mudancas: [],
-        tableData: []
+        tableData: [],
+        incorporated:null,
+        applicable:null
+
+
 
       },
       methods: {
         search() {
+          console.log(this.incorporated)
           this.nomes = [];
           axios
             .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
             .then(response => {
-              this.nomes = response.data;
-              console.log(response.data)
+              for(var i = 0;i<response.data.length;i++){
+                if(response.data[i].status=='INCORPORATED'){
+                  console.log("Caiu aqui")
+                  if(this.incorporated==true){
+                    console.log("Caiu aqui tbm")
+                    this.nomes.push(response.data[i]);
+                  }
+                }
+                if(response.data[i].status=='APPLICABLE'){
+                  if(this.incorporated==true){
+                    this.nomes.push(response.data[i]);
+                  }
+                }
+              }
+              console.log(this.nomes)
             })
             .catch(error => {
               console.error(error);
             });
 
+        },
+        incorporatedFunction() {
+        // Coloque o código da sua função aqui
+        const checkbox = document.getElementById('checkbox1');
+        checkbox.addEventListener('change', function() {
+          if (this.checked) {
+            this.incorporated = this.checked;
+            console.log('O checkbox está marcado');
+          } else {
+            console.log('O checkbox está desmarcado');
+          }
+        });
+        console.log("Ta true?"+this.incorporated)
+
+
+        this.search();
+        },
+        applicableFunction() {
+        // Coloque o código da sua função aqui
+        const checkbox = document.getElementById('checkbox1');
+        checkbox.addEventListener('change', function() {
+          if (this.checked) {
+            this.applicable = this.checked;
+            console.log('O checkbox está marcado');
+          } else {
+            console.log('O checkbox está desmarcado');
+          }
+        });
+
+        this.search();
         },
         save() {
 
@@ -208,7 +288,7 @@
 
             if (this.nomes[(i - 1)].status == "INCORPORATED") {
               if (rowData.status1 == false) {
-                let json = '{"SB":"'+rowData.idBoletim+'","MUDANCA":"INCORPORATED ➜ APPLICABLE"}'
+                let json = '{"SB":"' + rowData.idBoletim + '","MUDANCA":"INCORPORATED ➜ APPLICABLE"}'
                 this.mudancas.push(JSON.parse(json))
                 this.tableData.push(rowData);
               }
@@ -217,7 +297,7 @@
           }
         },
 
-        alter(){
+        alter() {
           console.log(this.mudancas)
           axios.post('http://localhost:8080/saveChassi', this.tableData)
             .then(response => {
