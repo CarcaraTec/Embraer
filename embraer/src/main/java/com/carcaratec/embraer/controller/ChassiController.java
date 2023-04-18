@@ -3,7 +3,7 @@ package com.carcaratec.embraer.controller;
 import com.carcaratec.embraer.dataImporter.LoadData;
 import com.carcaratec.embraer.model.*;
 import com.carcaratec.embraer.repository.*;
-import com.carcaratec.embraer.dataImporter.service.LogicControl;
+import com.carcaratec.embraer.service.LogicControl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.json.JSONArray;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*")
 @RestController
 public class ChassiController {
     @PersistenceContext
