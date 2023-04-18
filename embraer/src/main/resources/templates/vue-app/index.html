@@ -2,8 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -63,6 +62,9 @@
           margin-right: 20px;
           margin-left: 20px;
        }
+       .custom-select-width{
+          width: 150px;
+       }
 
     </style>
 
@@ -79,7 +81,7 @@
         <div class="col-md-8">
           <div class="card shadow">
             <div class="card-header bg-primary2 text-white">
-              <h5 class="font-weight-bold mb-0">EMBRAER APP</h5>
+              <h5 class="font-weight-bold mb-0">CONSULTA</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
@@ -87,17 +89,30 @@
                 <div class="input-group">
                   <input v-model="idChassi" type="text" class="form-control">
                   <div class="input-group-append">
-                    <button @click="search" class="btn btn-primary " type="button" >Search</button>
+                    <button @click="search" class="btn btn-primary " type="button" style="margin-left: 5px;">Search</button>
                     
                   </div>
               </div>
             </div>
-                <div>
-                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" @change="onSelectChange">
-                    <option selected>Open this select menu</option>
-                    <option v-for="(cat, index) in category" :value="index" :key="index">{{ cat }}</option>
-                  </select>
+                <div class="d-flex justify-content-between" style="margin-top: 8px;">
+                    <div class="w-50">
+                        <select class="form-select form-select-sm custom-select-width" aria-label=".form-select-lg example" @change="onSelectChange">
+                            <option selected>Category</option>
+                            <option v-for="(cat, index) in category" :value="index" :key="index">{{ cat }}</option>
+                        </select>
+                    </div>
+                    <div class="w-50 d-flex justify-content-end">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="switch-yes" v-model="checkedYes">
+                            <label class="form-check-label" for="switch-yes">✔</label>
+                        </div>
+                        <div class="form-check form-switch ms-3">
+                            <input class="form-check-input" type="checkbox" id="switch-no" v-model="checkedNo">
+                            <label class="form-check-label" for="switch-no">❌</label>
+                        </div>
+                    </div>
                 </div>
+
               <div class="table-responsive">
                 <table class="table table-bordered table-striped mt-4">
                   <thead id="table-1" class="bg-primary2 text-white">
@@ -107,7 +122,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="(nome,index) in nomes" :key="nomes.idItem">
+                    <tr v-for="(nome,index) in nomes" :key="nomes.idItem" v-if="(checkedYes && nome.status === '✔') || (checkedNo && nome.status === '❌') || (!checkedYes && !checkedNo)">
                       <td class="text-center">{{ nomes[index].nome }}</td>
                       <td class="text-center">{{ nomes[index].status }}</td>
                     </tr>
@@ -130,7 +145,9 @@
           ],
           nomes:[],
           category:[],
-          idChassi: null
+          idChassi: null,
+          checkedYes: false,
+          checkedNo: false
         },
         methods: {
           search() {
