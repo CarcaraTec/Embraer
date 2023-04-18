@@ -95,7 +95,7 @@
                 <div class="input-group">
                   <input v-model="idChassi" type="text" class="form-control">
                   <div class="input-group-append">
-                    <button @click="search" class="btn btn-primary" type="button">Search</button>
+                    <button @click="searchLog" class="btn btn-primary" type="button">Search</button>
                     <button @click="save" class="btn btn-primary" type="button" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Save</button>
 
@@ -133,14 +133,14 @@
                 <tr>
                   <td>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="checkbox1" @click="incorporatedFunction">
-                      <label class="form-check-label" for="checkbox1">Default switch checkbox input 1</label>
+                      <input class="form-check-input" type="checkbox" id="checkbox1" @change="incorporatedFunction">
+                      <label class="form-check-label" for="checkbox1">Incorporated</label>
                     </div>
                   </td>
                   <td>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="checkbox2" @click="applicableFunction">
-                      <label class="form-check-label" for="checkbox2">Default switch checkbox input 2</label>
+                      <input class="form-check-input" type="checkbox" id="checkbox2" @change="applicableFunction">
+                      <label class="form-check-label" for="checkbox2">Applicable</label>
                     </div>
                   </td>
                 </tr>
@@ -192,16 +192,31 @@
         idChassi: null,
         mudancas: [],
         tableData: [],
-        incorporated:null,
-        applicable:null
+        incorporated:false,
+        applicable:false
 
 
 
       },
       methods: {
+        searchLog(){
+          const vm = this;
+          vm.incorporated = true;
+          vm.applicable = true;
+
+          const checkbox1 = document.getElementById('checkbox1');
+          checkbox1.checked = true;
+
+          const checkbox2 = document.getElementById('checkbox2');
+          checkbox2.checked = true;
+          
+          
+          this.search();
+
+        },
         search() {
           console.log(this.incorporated)
-          this.nomes = [];
+          
           axios
             .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
             .then(response => {
@@ -214,7 +229,7 @@
                   }
                 }
                 if(response.data[i].status=='APPLICABLE'){
-                  if(this.incorporated==true){
+                  if(this.applicable==true){
                     this.nomes.push(response.data[i]);
                   }
                 }
@@ -226,36 +241,31 @@
             });
 
         },
-        incorporatedFunction() {
-        // Coloque o código da sua função aqui
-        const checkbox = document.getElementById('checkbox1');
-        checkbox.addEventListener('change', function() {
-          if (this.checked) {
-            this.incorporated = this.checked;
-            console.log('O checkbox está marcado');
-          } else {
-            console.log('O checkbox está desmarcado');
-          }
-        });
-        console.log("Ta true?"+this.incorporated)
-
-
+        incorporatedFunction(event) {
+        const vm = this; // Armazena uma referência ao objeto Vue
+        if (event.target.checked) {
+          vm.incorporated = true;
+          console.log('O checkbox está marcado');
+        } else {
+          vm.incorporated = false;
+          console.log('O checkbox está desmarcado');
+        }
+        console.log("Ta true? " + vm.incorporated);
         this.search();
-        },
-        applicableFunction() {
-        // Coloque o código da sua função aqui
-        const checkbox = document.getElementById('checkbox1');
-        checkbox.addEventListener('change', function() {
-          if (this.checked) {
-            this.applicable = this.checked;
-            console.log('O checkbox está marcado');
-          } else {
-            console.log('O checkbox está desmarcado');
-          }
-        });
-
+      }
+      ,
+      applicableFunction(event) {
+        const vm = this; // Armazena uma referência ao objeto Vue
+        if (event.target.checked) {
+          vm.applicable = true;
+          console.log('O checkbox está marcado');
+        } else {
+          vm.applicable = false;
+          console.log('O checkbox está desmarcado');
+        }
+        console.log("Ta true? " + vm.applicable);
         this.search();
-        },
+      },
         save() {
 
           // obter todas as linhas da tabela populada pelo Vue
