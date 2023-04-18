@@ -216,7 +216,7 @@
         },
         search() {
           console.log(this.incorporated)
-          
+
           axios
             .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
             .then(response => {
