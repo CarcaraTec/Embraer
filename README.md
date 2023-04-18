@@ -55,16 +55,17 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## 📔**REQUISITOS FUNCIONAIS X REQUISITOS NÃO FUNCIONAIS**
 
 * **Requisitos Funcionais:**
-•	Utilização de API’s para futura integração com sistemas em plataforma mobile
-•	Acesso à base de dados de clientes (usuário, senha e equipamento)
-•	Usuários devem ter perfis diferentes (administrador, edição e consulta)
-    	**Administrador (Embraer):** permissão para criar, modificar e remover clientes; modificar e inserir/remover novos itens à base de dados apresentadas aos clientes; inserir notificações de atualizações; gerar visibilidade estatística dos clientes, para oportunidade de vendas de opcionais.
-     **Edição:** permissão de escrita da lista de SB’s da aeronave cujo cliente é o dono.
-    	**Consulta:** permissão de visualização da lista de itens opcionais da aeronave.
-•	Possibilidade de aplicação de filtros de seleção (por categoria de item)
-•	Visualização de arquivos PDF no App e possibilidade de exportação no mesmo formato, com registro da data de geração do arquivo e do usuário.
+<a •	Utilização de API’s para futura integração com sistemas em plataforma mobile a>
+<a •	Acesso à base de dados de clientes (usuário, senha e equipamento) a>
+<a •	Usuários devem ter perfis diferentes (administrador, edição e consulta) a>
+    <a	**Administrador (Embraer):** permissão para criar, modificar e remover clientes; modificar e inserir/remover novos itens à base de dados apresentadas aos clientes; inserir notificações de atualizações; gerar visibilidade estatística dos clientes, para oportunidade de vendas de opcionais. a>
+     <a **Edição:** permissão de escrita da lista de SB’s da aeronave cujo cliente é o dono. a>
+    	<a **Consulta:** permissão de visualização da lista de itens opcionais da aeronave. a>
+<a •	Possibilidade de aplicação de filtros de seleção (por categoria de item) a>
+<a •	Visualização de arquivos PDF no App e possibilidade de exportação no mesmo formato, com registro da data de geração do arquivo e do usuário. a>
 
 * **Requisitos Não Funcionais:**
+-
 
 
 
