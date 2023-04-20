@@ -18,10 +18,81 @@
     <title>Embraer App</title>
     <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
 </head>
+<<<<<<< Updated upstream
 <body>
 <div>
     <a href="index.html">Volta para home</a>
     <H1>PÁGINA EM DESENVOLVIMENTO</H1>
 </div>
 </body>
+=======
+    <body>
+
+        <style>
+
+            .bg-primary2 {
+            background-color: rgb(11, 27, 91);
+            }
+
+            .btn-primary {
+              color: #fff;
+              background-color: rgb(11, 27, 91);
+              border-color: #fff;
+            }
+
+            .logo-container {
+              background-color: rgb(11, 27, 91);
+              color: #FFF;
+            }
+            .fa-solid {
+            margin-right: 20px;
+            margin-left: 20px;
+            }
+
+        </style>
+
+        <div class="logo-container p-3 d-flex justify-content-between">
+            <a href="index.html"><i class="fa-solid fa-house mt-2"></i></a>
+            <img src="logo.embraer.png">
+            <div>
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user mt-2"></i>
+            </div>
+        </div>
+
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary2 text-white"></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div class="container">
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="file" id="uploadfile" accept=".csv">
+                                    <button type="button" id="uploadconfirm" class="btn btn-primary my-sm-0">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const uploadconfirm = document.getElementById('uploadconfirm').
+              addEventListener('click', () => {
+              Papa.parse(document.getElementById('uploadfile').files[0],
+              {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results){
+                  console.log(results);
+                }
+              });
+            });
+        </script>
+
+    </body>
+>>>>>>> Stashed changes
 </html>
