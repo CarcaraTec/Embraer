@@ -8,7 +8,7 @@
 </h4>
 
 
-## ✏️ **CHALLANGE**
+## ✏️ **CHALLENGE**
 
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
