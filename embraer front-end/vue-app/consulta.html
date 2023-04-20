@@ -83,7 +83,7 @@
         <div class="col-md-8">
           <div class="card shadow">
             <div class="card-header bg-primary2 text-white">
-              <h5 class="font-weight-bold mb-0">CONSULTA</h5>
+              <h5 class="font-weight-bold mb-0">CONSULTATION</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
@@ -241,7 +241,7 @@
 
       // Adiciona o texto e o número do chassi ao documento PDF
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(12).text('Chassi: ' +chassi+ ' - Installed items report', 66, 20);
+      doc.setFontSize(12).text('Chassi: ' +chassi+ ' - Installed Items Report', 66, 20);
       doc.setLineWidth(0.5);
       doc.line(14, 23, 196, 23); //
       // Define as configurações da tabela
@@ -287,7 +287,7 @@
       }
 
       // Faz o download do arquivo PDF
-      doc.save('tabela.pdf');
+      doc.save('relatório.pdf');
     }
 
   </script>
