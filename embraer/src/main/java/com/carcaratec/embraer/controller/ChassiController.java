@@ -176,15 +176,24 @@ public class ChassiController {
 
             System.out.println(data);
 
+            String chassiString = "";
+
+            Integer chassi = 0;
+
             for(int i = 0;i<data.length();i++){
-                JSONObject chassiBoletim = new JSONObject(data.get(i));
-                System.out.println(data.get(i));
-            //    System.out.println(chassiBoletim.get("Status"));
+                JSONObject chassiBoletim0 = new JSONObject(data.get(i).toString());
+                if(i==0){
+                    chassiString = chassiBoletim0.get("Chassis ").toString().replaceAll("[^0-9]","");
+
+                    chassi = Integer.valueOf(chassiString);
+                }
+
+                ChassiBoletim chassiBoletim = new ChassiBoletim(chassi,chassiBoletim0.get("Boletim de serviço").toString(),
+                        chassiBoletim0.get("Status").toString());
+
+
+                chassiBoletimRepository.save(chassiBoletim);
             }
-//            System.out.println(data);
-            //System.out.println(json.get("data"));
-//        JSONArray jsonArray = new JSONArray(json.get("data"));
-//            System.out.println(jsonArray);
         }
 
 }
