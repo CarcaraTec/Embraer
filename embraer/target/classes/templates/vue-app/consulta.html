@@ -19,8 +19,6 @@
   </head>
 
   <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js" integrity="sha512-03CCNkeosDFN2zCCu4vLpu3pJfZcrL48F3yB8k87ejT+OVMwco7IH3FW02vtbGhdncS6gyYZ/duYaC/K62xQPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <div class="logo-container p-3 d-flex justify-content-between">
     <a href="index.html"><i class="fa-solid fa-house mt-2"></i></a>
     <img src="logo.embraer.png">
@@ -233,21 +231,25 @@
     function exportarPDF() {
       // Crie uma nova instância da biblioteca jsPDF
       var doc = new jsPDF();
+      var imgData = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAMAAABrrFhUAAAAM1BMVEUAAAAARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJwARJypp4XDAAAAEHRSTlMAECAwQFBgcICPn6+/z9/vIxqCigAAA0VJREFUeNrswQENAAAAATD6l9bD/gcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB+deSah3brIAxAxQghDhj9/9d2YCyGMtRxlu6b5cQU3coSJvEEKMRlPNlAH5eCJ9mAOm5I7PriNxmJ4kAbvmCHvviv2BPUpf8de6LK7qe4AYaCPQmUsSGhcANgMw4Uq7D7Kd4ARJwIyrqf7vjdjoTCBhhw5q4q/TecyUZj9yOK0Xb0obgBRlzx72VOnAg0dIED30YshOnVjpvDw3TldZ6ImZBmFGMSEsIG6HEi0dAOBztJTUyh8Tiz22Nl5byQ+UHxE8qfXV3BlRv8VgBJDOt6+QuIbQo4CQSgFR99cAv4tQBKgfxivYyAQglQCQIBV2n3W8kgElAScTuGaNk1vr1bb2rUIMY56v1C8e75+28ayIlwkIYh8T3gMhu/kQlIzNDWll2XuMVOADTy9+A4h6kCzgTwppwu41qd0zAU3xVg/DehIMfVczwWkD3hDgH2SNEjAWwvoL22FgczCiBH8RiPp8s4r85MAvybAkxGOaIakGCr/xwJAPFZEVwzgBKgdZHA1gBhBlD8/y/Adjc42ocCsgOmBiSAZrC1kZ0VwNWAiyD+/xNwBLDd61PV4wwoZpzjiKEJpI1EfLML5H+KH2U1oEXQwuBqgP8eDIuAshmAbTXF14CJ/DwBxv3kHVlukUPWBaALIcEoYHxpZDdCdh2MfBdYsOITcPk5wBjCHolwCqAY/CQgNvIpgGpAphq6pECsHZWwUw046qYAtws2gqIaQCmQYBAwE8cssl0XTWmILL7sAjexADDsbRD+RIBrq3wqwI0CgPZR23RcVW5vtUEPMq4CAzIBkOi/DwVswAgoy82caVgoQP5ewHocIj8PqAJd/KTO5PnH9+iALqh0U3W4uEATVlP0XaSYxBvQfSSUjbLPQ2k3YDPXDFWxqTewbguD5o/G0JOl5vfHPtq3bwMIoRgKYP4Xyey/Lb2pqZ40hLPPd955XOaBSO+Okm+Ee1m4V5wpOxneu6O54oy9lQN55tZ25/me0eVA747OUXnGEl0O9O5oqyauLFw8TgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACPuAB6cK6WWhyiSwAAAABJRU5ErkJggg==';
+      var img = new Image();
+      img.src = imgData;
+      doc.addImage(img, 'PNG', 163, 0, 35, 35);
 
       // Obtem o número do chassi selecionado
       var chassi = document.getElementById('select-chassi').value;
 
       // Adiciona o texto e o número do chassi ao documento PDF
+      doc.setFont('helvetica', 'bold');
       doc.setFontSize(12).text('Chassi: ' +chassi+ ' - Installed items report', 66, 20);
       doc.setLineWidth(0.5);
-      doc.line(14, 23, 196, 23); // Desenha a linha na posição x = 10, y = 23
+      doc.line(14, 23, 196, 23); //
       // Define as configurações da tabela
       var table = document.getElementById('table-1');
       var rows = table.getElementsByTagName('tr');
 
       // Cria uma matriz para armazenar os dados da tabela
       var data = [];
-
       // Preenche a matriz com os dados da tabela
       for (var i = 1; i < rows.length; i++) {
         var row = [], cols = rows[i].querySelectorAll('td, th');
@@ -269,6 +271,8 @@
           fillColor: [11, 27, 91],
           textColor: [255, 255, 255],
         },
+        startY: 30,
+        margin: {top: 40},
       });
 
       // Adiciona um texto no rodapé do PDF com a data e hora atual
