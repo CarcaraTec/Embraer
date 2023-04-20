@@ -167,6 +167,7 @@
         },
         methods: {
           search() {
+            this.nomes = [];
             axios
               .get('http://localhost:8080/logica?idChassi=' + this.idChassi)
               .then(response => {
