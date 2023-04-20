@@ -10,13 +10,15 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/c9fd3db041.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.4.3/jspdf.plugin.autotable.min.js"></script>
+
 
     <title>Embraer App</title>
     <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
   </head>
 
   <body>
-
   <div class="logo-container p-3 d-flex justify-content-between">
     <a href="index.html"><i class="fa-solid fa-house mt-2"></i></a>
     <img src="logo.embraer.png">
@@ -70,12 +72,12 @@
 
     <div id="app"></div>
     <script>
-      
+
       new Vue({
         
         el: "#app",
         template:`
-        
+
         <div class="container">
       <div class="row mt-5 justify-content-center">
         <div class="col-md-8">
@@ -87,7 +89,7 @@
               <div class="form-group">
                 <label for="chassi" class="font-weight-bold">Chassi:</label>
                 <div class="input-group">
-                  <select v-model="idChassi" class="form-select form-select-sm custom-select-width">
+                  <select v-model="idChassi" id="select-chassi" class="form-select form-select-sm custom-select-width">
                     <option v-for="option in chassiOptions" :value="option.idChassi" :key="option.idChassi">{{ option.idChassi }}</option>
                   </select>
                   <div class="input-group-append">
@@ -113,9 +115,11 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="d-flex justify-content-end">
+                    <button onclick="exportarPDF()" class="btn btn-primary btn-sm " type="button" style="margin-top: 10px">Generate PDF</button>
+                </div>
               <div class="table-responsive">
-                <table class="table table-bordered table-striped mt-4">
+                <table class="table table-bordered table-striped mt-4" id="table-1">
                   <thead id="table-1" class="bg-primary2 text-white">
                     <tr>
                       <th class="text-center">Item</th>
@@ -136,9 +140,9 @@
       </div>
     </div>
         `,
-        
+
         data: {
-          
+
           items: [
             { id: 1, name: "Item 1"  , yes: "Yes", no: "No" },
             { id: 2, name: "Item 2", yes: "Yes", no: "No" },
@@ -163,6 +167,7 @@
         },
         methods: {
           search() {
+            this.nomes = [];
             axios
               .get('http://localhost:8080/logica?idChassi=' + this.idChassi)
               .then(response => {
@@ -223,5 +228,65 @@
         }
       });
     </script>
+  <script>
+    function exportarPDF() {
+      // Crie uma nova instância da biblioteca jsPDF
+      var doc = new jsPDF();
+
+      // Obtem o número do chassi selecionado
+      var chassi = document.getElementById('select-chassi').value;
+
+      // Adiciona o texto e o número do chassi ao documento PDF
+      doc.setFontSize(12).text('Chassi: ' +chassi+ ' - Installed items report', 66, 20);
+      doc.setLineWidth(0.5);
+      doc.line(14, 23, 196, 23); // Desenha a linha na posição x = 10, y = 23
+      // Define as configurações da tabela
+      var table = document.getElementById('table-1');
+      var rows = table.getElementsByTagName('tr');
+
+      // Cria uma matriz para armazenar os dados da tabela
+      var data = [];
+
+      // Preenche a matriz com os dados da tabela
+      for (var i = 1; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll('td, th');
+        for (var j = 0; j < cols.length; j++) {
+            var text = cols[j].innerText;
+            text = text.replace(/✔/g, 'Yes').replace(/❌/g, 'No');
+            row.push(text);
+        }
+        data.push(row);
+      }
+
+      // Define as configurações do documento PDF
+      var header = ['Item', 'Installed'];
+      doc.autoTable({
+        head: [header],
+        body: data,
+        margin: { top: 30 },
+        headStyles: {
+          fillColor: [11, 27, 91],
+          textColor: [255, 255, 255],
+        },
+        startY: 30,
+        margin: {top: 40},
+      });
+
+      // Adiciona um texto no rodapé do PDF com a data e hora atual
+      var now = new Date();
+      var dateTime = now.toLocaleString();
+      var pageCount = doc.internal.getNumberOfPages(); // obtem o número total de páginas
+      for (var i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        var y = doc.internal.pageSize.height - 10; // define a posição vertical do texto (10 mm do fundo da página)
+        doc.setFontSize(8);
+        doc.text('Generated on: ' +dateTime+ ' - Developed By CarcaraTec', doc.internal.pageSize.width / 2, y, 'center'); // define a posição horizontal do texto (centro da página)
+      }
+
+      // Faz o download do arquivo PDF
+      doc.save('tabela.pdf');
+    }
+
+  </script>
 </body>
 </html>

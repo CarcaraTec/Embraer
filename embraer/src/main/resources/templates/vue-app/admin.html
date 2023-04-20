@@ -84,6 +84,7 @@
                 complete: function(results){
                   console.log(results);
 
+
                   axios.post('http://localhost:8080/loadData', results)
                       .then((response) => {
                         console.log(response.data); // aqui você pode acessar os resultados
@@ -92,10 +93,10 @@
                         console.log(error);
                   });
 
+
                 }
               });
             });
         </script>
 
-    </body>
 </html>

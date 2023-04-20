@@ -18,7 +18,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [x] **SPRINT 1** - 13/03/2023 a 02/04/2023
 
-- [ ] **SPRINT 2** - 03/04/2023 a 23/04/2023
+- [x] **SPRINT 2** - 03/04/2023 a 23/04/2023
 
 - [ ] **SPRINT 3** - 24/04/2023 a 14/05/2023
 
@@ -66,6 +66,10 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 * **Requisitos Não Funcionais:**
 
+## 🎥 **Mockup**
+<div align="center">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/003cdad5c99709579affc120d4f38fbe7e8145c4/Documents/images/aplica%C3%A7%C3%A3o.gif.gif" alt="Exemplo de GIF">
+</div>
 
 
 ## 🤓**DATA MODELING**
