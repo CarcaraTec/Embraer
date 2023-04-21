@@ -55,9 +55,13 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 * **Functional Requirements:**
  •	Use of APIs for future integration with mobile platform systems
+ 
  • Access to the customer database (user, password and equipment) 
+ 
  •	Users must have different profiles (administrator, editing and query)
+ 
  •	Possibility of applying selection filters (by item category)
+ 
  •	Visualization of PDF files in the App and possibility of export in the same format, with registration of the file generation date and the user. 
 
 
