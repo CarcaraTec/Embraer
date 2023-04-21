@@ -31,40 +31,35 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## 🎯 **BACKLOG**
 
 * **SPRINT 1**
-    * Modelagem de Banco de Dados 
-    * Criação do Bando de Dados em Cloud
-    * Tela de consulta/motorista com alguns opcionais    
+    * Database Modeling
+    * Creating the Database in the Cloud
+    * Consultation/driver screen with some options    
 
 * **SPRINT 2**
-   * Aprimorar tela consulta/motorista
-   * Iniciar tela editor
-   * Aplicação web e mobile com responsividade
-   * Revisão das regras do banco de dados (views, funções, procedures)
+   * Improve query/driver screen
+   * Start editor screen
+   * Responsive web and mobile application
+   * Generate PDF on the platform  
 
 * **SPRINT 3**
-  * Gerar PDF na plataforma
-  * Inserir notificação no sistema
-  * Manual de Usuário
+  * Creation of access profiles (admin, editor and driver)
+  * Insert notification in the system
+  * User Manual
 
 * **SPRINT 4**
-  * Auditoria
-  * Criação de perfis de acesso (admin, editor e motorista)
-  * Login com SSO
-  * Desenvolvimento de Push Notification
+  * Audit
+  * Login with SSO
+  * Push Notification Development
 
-## 📔**REQUISITOS FUNCIONAIS X REQUISITOS NÃO FUNCIONAIS**
+## 📔 **FUNCTIONAL REQUIREMENTS**
 
-* **Requisitos Funcionais:**
- •	Utilização de API’s para futura integração com sistemas em plataforma mobile 
- •	Acesso à base de dados de clientes (usuário, senha e equipamento) 
- •	Usuários devem ter perfis diferentes (administrador, edição e consulta) 
-    **Administrador (Embraer):** permissão para criar, modificar e remover clientes; modificar e inserir/remover novos itens à base de dados apresentadas aos clientes; inserir notificações de atualizações; gerar visibilidade estatística dos clientes, para oportunidade de vendas de opcionais. 
-     **Edição:** permissão de escrita da lista de SB’s da aeronave cujo cliente é o dono. 
-    	**Consulta:** permissão de visualização da lista de itens opcionais da aeronave. 
- •	Possibilidade de aplicação de filtros de seleção (por categoria de item) 
- •	Visualização de arquivos PDF no App e possibilidade de exportação no mesmo formato, com registro da data de geração do arquivo e do usuário. 
+* **Functional Requirements:**
+ •	Use of APIs for future integration with mobile platform systems
+ • Access to the customer database (user, password and equipment) 
+ •	Users must have different profiles (administrator, editing and query)
+ •	Possibility of applying selection filters (by item category)
+ •	Visualization of PDF files in the App and possibility of export in the same format, with registration of the file generation date and the user. 
 
-* **Requisitos Não Funcionais:**
 
 ## 🎥 **Mockup**
 <div align="center">
@@ -72,14 +67,14 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 </div>
 
 
-## 🤓**DATA MODELING**
+## 🤓 **DATA MODELING**
 ![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
 
-## 📉**BURNDOWN**
+## 📉 **BURNDOWN**
 
 ![burndown](https://github.com/CarcaraTec/Embraer/blob/8af2515751a1603a8bf08410334d8766e8e8ce9a/Documents/images/BURNDOWN%20EMBRAER%201.png)
 
-## 💻**TECHNOLOGY AND TOOLS**
+## 💻 **TECHNOLOGY AND TOOLS**
 
 <details>
 <summary>Back-End</summary>
