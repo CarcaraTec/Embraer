@@ -54,7 +54,8 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## 📔 **FUNCTIONAL REQUIREMENTS**
 
 * **Functional Requirements:**
- •	Use of APIs for future integration with mobile platform systems
+
+ • Use of APIs for future integration with mobile platform systems
  
  • Access to the customer database (user, password and equipment) 
  
