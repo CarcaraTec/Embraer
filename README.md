@@ -1,4 +1,6 @@
-![slide1](https://github.com/CarcaraTec/Embraer/blob/3e04967df5e8a75c8860d1c18d60885881d5225f/Documents/images/Aircraft%20Configuration%20Control.png)
+<div align="center">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/636035078aec467e06fe8adb95ccd61343b47fad/Documents/images/Gif_acc.gif">
+</div>
 
 <h4 align="center"> 
  <a href="https://docs.oracle.com/en/java/"><img src = "https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white"/></a>
@@ -61,7 +63,9 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 
 ## 🎥 **Mockup**
+
 <div align="center">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/636035078aec467e06fe8adb95ccd61343b47fad/Documents/images/mockup3%202.PNG">
   <img src="https://github.com/CarcaraTec/Embraer/blob/003cdad5c99709579affc120d4f38fbe7e8145c4/Documents/images/aplica%C3%A7%C3%A3o.gif.gif" alt="Exemplo de GIF">
 </div>
 
