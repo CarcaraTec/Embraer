@@ -66,7 +66,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 <div align="center">
   <img src="https://github.com/CarcaraTec/Embraer/blob/636035078aec467e06fe8adb95ccd61343b47fad/Documents/images/mockup3%202.PNG">
-  <img src="https://github.com/CarcaraTec/Embraer/blob/003cdad5c99709579affc120d4f38fbe7e8145c4/Documents/images/aplica%C3%A7%C3%A3o.gif.gif" alt="Exemplo de GIF">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/63dc37f7219bebdb97773a023a12e027c918d388/Documents/images/Mockup2.gif">
 </div>
 
 
