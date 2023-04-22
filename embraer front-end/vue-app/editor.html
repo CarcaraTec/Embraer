@@ -87,15 +87,17 @@
         <div class="col-md-8">
           <div class="card shadow">
             <div class="card-header bg-primary2 text-white">
-              <h5 class="font-weight-bold mb-0">EMBRAER</h5>
+              <h5 class="font-weight-bold mb-0">EDITOR</h5>
             </div>
             <div class="card-body">
               <div class="form-group">
                 <label for="chassi" class="font-weight-bold">Chassi:</label>
                 <div class="input-group">
-                  <input v-model="idChassi" type="text" class="form-control">
+                  <select v-model="idChassi" id="select-chassi" class="form-select form-select-sm custom-select-width">
+                    <option v-for="option in chassiOptions" :value="option.idChassi" :key="option.idChassi">{{ option.idChassi }}</option>
+                  </select>
                   <div class="input-group-append">
-                    <button @click="searchLog" class="btn btn-primary" type="button">Search</button>
+                    <button @click="searchLog" class="btn btn-primary" type="button" style="margin-left: 5px;"">Search</button>
                     <button @click="save" class="btn btn-primary" type="button" data-bs-toggle="modal"
                       data-bs-target="#exampleModal">Save</button>
 
@@ -105,14 +107,14 @@
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modificações:</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Modifications:</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                           <div class="modal-body">
                             <table class="table table-bordered table-striped mt-4">
                               <tr>
                                 <th class="text-center">SB</th>
-                                <th class="text-center">MUDANÇA</th>
+                                <th class="text-center">CHANGE</th>
                               </tr>
                               <tr v-for="(mudanca,index) in mudancas">
                                 <td class="text-center">{{ mudancas[index].SB }}</td>
@@ -122,29 +124,26 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" @click="alter" class="btn btn-primary">Save changes</button>
+                            <button type="button" @click="alter" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <table>
-                <tr>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="checkbox1" @change="incorporatedFunction">
-                      <label class="form-check-label" for="checkbox1">Incorporated</label>
+                
+                    <div class="d-flex justify-content-end" style="margin-top: 10px">
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="checkbox1" @change="incorporatedFunction">
+                        <label class="form-check-label" for="checkbox1">Incorporated</label>
+                      </div>
+
+                      <div class="form-check form-switch" style="margin-left: 10px">
+                        <input class="form-check-input" type="checkbox" id="checkbox2" @change="applicableFunction">
+                        <label class="form-check-label" for="checkbox2">Applicable</label>
+                      </div>
                     </div>
-                  </td>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="checkbox2" @change="applicableFunction">
-                      <label class="form-check-label" for="checkbox2">Applicable</label>
-                    </div>
-                  </td>
-                </tr>
-              </table>
+
 
                 <div class="table-responsive">
                   <table id="table-1" class="table table-bordered table-striped mt-4">
@@ -193,11 +192,19 @@
         mudancas: [],
         tableData: [],
         incorporated:false,
-        applicable:false
-
-
-
-      },
+        applicable:false,
+        idChassi: '',
+          chassiOptions: []
+        },
+        mounted() {
+          axios.get('http://localhost:8080/chassis')
+            .then(response => {
+              this.chassiOptions = response.data;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        },
       methods: {
         searchLog(){
           const vm = this;

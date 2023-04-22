@@ -6,6 +6,7 @@ import com.carcaratec.embraer.repository.*;
 import com.carcaratec.embraer.service.LogicControl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import oracle.ucp.proxy.annotation.Post;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,4 +165,35 @@ public class ChassiController {
             List<Item> findByCategoria = itemRepository.findByCategoria(category);
             return findByCategoria;
         }
+
+        @PostMapping("/loadData")
+        public void loadData(@RequestBody String stringJson){
+
+        JSONObject json = new JSONObject(stringJson);
+
+
+            JSONArray data = new JSONArray(json.get("data").toString());
+
+            System.out.println(data);
+
+            String chassiString = "";
+
+            Integer chassi = 0;
+
+            for(int i = 0;i<data.length();i++){
+                JSONObject chassiBoletim0 = new JSONObject(data.get(i).toString());
+                if(i==0){
+                    chassiString = chassiBoletim0.get("Chassis ").toString().replaceAll("[^0-9]","");
+
+                    chassi = Integer.valueOf(chassiString);
+                }
+
+                ChassiBoletim chassiBoletim = new ChassiBoletim(chassi,chassiBoletim0.get("Boletim de serviço").toString(),
+                        chassiBoletim0.get("Status").toString());
+
+
+                chassiBoletimRepository.save(chassiBoletim);
+            }
+        }
+
 }

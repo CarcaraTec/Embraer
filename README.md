@@ -1,4 +1,6 @@
-![slide1](https://github.com/CarcaraTec/Embraer/blob/3e04967df5e8a75c8860d1c18d60885881d5225f/Documents/images/Aircraft%20Configuration%20Control.png)
+<div align="center">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/636035078aec467e06fe8adb95ccd61343b47fad/Documents/images/Gif_acc.gif">
+</div>
 
 <h4 align="center"> 
  <a href="https://docs.oracle.com/en/java/"><img src = "https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white"/></a>
@@ -8,7 +10,7 @@
 </h4>
 
 
-## ✏️ **CHALLANGE**
+## ✏️ **CHALLENGE**
 
 Nowadays many pilots work as "freelancers" and do not operate only one aircraft/fleet, which makes it difficult to recognize certain equipment and software versions installed in the aircraft. In addition, the pilot does not always have quick access to all manuals and documents of the aircraft, which hinders his knowledge about the aircraft and its capabilities.
 
@@ -31,55 +33,51 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 ## 🎯 **BACKLOG**
 
 * **SPRINT 1**
-    * Modelagem de Banco de Dados 
-    * Criação do Bando de Dados em Cloud
-    * Tela de consulta/motorista com alguns opcionais    
+    * Database Modeling
+    * Creating the Database in the Cloud
+    * Consultation/driver screen with some options    
 
 * **SPRINT 2**
-   * Aprimorar tela consulta/motorista
-   * Iniciar tela editor
-   * Aplicação web e mobile com responsividade
-   * Revisão das regras do banco de dados (views, funções, procedures)
+   * Improve query/driver screen
+   * Start editor screen
+   * Responsive web and mobile application
+   * Generate PDF on the platform  
 
 * **SPRINT 3**
-  * Gerar PDF na plataforma
-  * Inserir notificação no sistema
-  * Manual de Usuário
+  * Creation of access profiles (admin, editor and driver)
+  * Insert notification in the system
+  * User Manual
 
 * **SPRINT 4**
-  * Auditoria
-  * Criação de perfis de acesso (admin, editor e motorista)
-  * Login com SSO
-  * Desenvolvimento de Push Notification
+  * Audit
+  * Login with SSO
+  * Push Notification Development
 
-## 📔**REQUISITOS FUNCIONAIS X REQUISITOS NÃO FUNCIONAIS**
+## 📔 **FUNCTIONAL REQUIREMENTS**
 
-* **Requisitos Funcionais:**
- •	Utilização de API’s para futura integração com sistemas em plataforma mobile 
- •	Acesso à base de dados de clientes (usuário, senha e equipamento) 
- •	Usuários devem ter perfis diferentes (administrador, edição e consulta) 
-    **Administrador (Embraer):** permissão para criar, modificar e remover clientes; modificar e inserir/remover novos itens à base de dados apresentadas aos clientes; inserir notificações de atualizações; gerar visibilidade estatística dos clientes, para oportunidade de vendas de opcionais. 
-     **Edição:** permissão de escrita da lista de SB’s da aeronave cujo cliente é o dono. 
-    	**Consulta:** permissão de visualização da lista de itens opcionais da aeronave. 
- •	Possibilidade de aplicação de filtros de seleção (por categoria de item) 
- •	Visualização de arquivos PDF no App e possibilidade de exportação no mesmo formato, com registro da data de geração do arquivo e do usuário. 
+ • Use of APIs for future integration with mobile platform systems <br> 
+ • Access to the customer database (user, password and equipment) <br> 
+ •	Users must have different profiles (administrator, editing and query) <br> 
+ •	Possibility of applying selection filters (by item category) <br> 
+ •	Visualization of PDF files in the App and possibility of export in the same format, with registration of the file generation date and the user. <br>
 
-* **Requisitos Não Funcionais:**
 
 ## 🎥 **Mockup**
+
 <div align="center">
+  <img src="https://github.com/CarcaraTec/Embraer/blob/636035078aec467e06fe8adb95ccd61343b47fad/Documents/images/mockup3%202.PNG">
   <img src="https://github.com/CarcaraTec/Embraer/blob/003cdad5c99709579affc120d4f38fbe7e8145c4/Documents/images/aplica%C3%A7%C3%A3o.gif.gif" alt="Exemplo de GIF">
 </div>
 
 
-## 🤓**DATA MODELING**
+## 🤓 **DATA MODELING**
 ![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
 
-## 📉**BURNDOWN**
+## 📉 **BURNDOWN**
 
 ![burndown](https://github.com/CarcaraTec/Embraer/blob/8af2515751a1603a8bf08410334d8766e8e8ce9a/Documents/images/BURNDOWN%20EMBRAER%201.png)
 
-## 💻**TECHNOLOGY AND TOOLS**
+## 💻 **TECHNOLOGY AND TOOLS**
 
 <details>
 <summary>Back-End</summary>
