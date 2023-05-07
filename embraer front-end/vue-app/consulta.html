@@ -157,7 +157,7 @@
           chassiOptions: []
         },
         mounted() {
-          axios.get('http://localhost:8080/chassis')
+          axios.get('http://localhost:8080/chassi')
             .then(response => {
               this.chassiOptions = response.data;
             })
@@ -178,7 +178,7 @@
               });
 
               axios
-              .get('http://localhost:8080/category')
+              .get('http://localhost:8080/item/category')
               .then(response => {
                 this.category = response.data;
                 console.log(response.data)

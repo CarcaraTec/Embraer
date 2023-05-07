@@ -197,7 +197,7 @@
           chassiOptions: []
         },
         mounted() {
-          axios.get('http://localhost:8080/chassis')
+          axios.get('http://localhost:8080/chassi')
             .then(response => {
               this.chassiOptions = response.data;
             })
@@ -226,7 +226,7 @@
           console.log(this.incorporated)
 
           axios
-            .get('http://localhost:8080/findBoletim?idChassi=' + this.idChassi)
+            .get('http://localhost:8080/chassiBoletim/findBoletim?idChassi=' + this.idChassi)
             .then(response => {
               for(var i = 0;i<response.data.length;i++){
                 if(response.data[i].status=='INCORPORATED'){
@@ -317,7 +317,7 @@
 
         alter() {
           console.log(this.mudancas)
-          axios.post('http://localhost:8080/saveChassi', this.tableData)
+          axios.post('http://localhost:8080/chassiBoletim/saveChassi', this.tableData)
             .then(response => {
               console.log(response.data);
             })
