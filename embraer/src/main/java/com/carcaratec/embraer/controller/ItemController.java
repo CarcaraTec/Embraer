@@ -1,7 +1,9 @@
 package com.carcaratec.embraer.controller;
 
 import com.carcaratec.embraer.model.dto.Item;
+import com.carcaratec.embraer.model.dto.ItemReturn;
 import com.carcaratec.embraer.repository.ItemRepository;
+import com.carcaratec.embraer.service.LogicControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,9 @@ public class ItemController {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @Autowired
+    private LogicControl logicControl;
 
     @GetMapping
     public List<Item> listarItems() {
@@ -38,5 +43,17 @@ public class ItemController {
     public List<Item> findByCategory(@RequestParam("category") String category){
         List<Item> findByCategoria = itemRepository.findByCategoria(category);
         return findByCategoria;
+    }
+
+    @GetMapping("/logica")
+    public List<ItemReturn> logica(@RequestParam("idChassi") Integer idChassi) {
+        List<ItemReturn> listItemReturn = logicControl.itemsDeal(idChassi, "all");
+        return listItemReturn;
+    }
+
+    @GetMapping("/logicaByCategory")
+    public List<ItemReturn> logicaCategory(@RequestParam("idChassi") Integer idChassi, @RequestParam("category") String category) {
+        List<ItemReturn> listItemReturn = logicControl.itemsDeal(idChassi, category.toLowerCase());
+        return listItemReturn;
     }
 }

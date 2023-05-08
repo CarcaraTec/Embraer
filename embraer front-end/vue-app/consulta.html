@@ -168,7 +168,7 @@
         methods: {
           search() {
             axios
-              .get('http://localhost:8080/logica?idChassi=' + this.idChassi)
+              .get('http://localhost:8080/item/logica?idChassi=' + this.idChassi)
               .then(response => {
                 this.nomes = response.data;
                 console.log(response.data)
@@ -215,7 +215,7 @@
 
             
             axios
-              .get('http://localhost:8080/logicaByCategory?idChassi=' + this.idChassi +'&category='+selectedText)
+              .get('http://localhost:8080/item/logicaByCategory?idChassi=' + this.idChassi +'&category='+selectedText)
               .then(response => {
                 this.nomes = response.data;
                 console.log(response.data)
