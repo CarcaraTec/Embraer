@@ -85,13 +85,11 @@ public class LogicControl extends VerificacaoHierarquia {
                 if(caminhoHierarquia.size()==1){
                     switch (operador){
                         case "AND":{
-                            if(verificaBoletim(idChassi, boletim1)){
-                                if(verificaBoletim(idChassi, boletim2));
-                            }
+                            status = estaInstaladoAnd(idChassi,boletim1,boletim2);
                         }
                             break;
                         case "OR":{
-
+                            status = estaInstaladoOr(idChassi,boletim1,boletim2);
                         }
                             break;
                     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class VerificacaoHierarquia {
 
@@ -35,11 +36,29 @@ public class VerificacaoHierarquia {
         return isValid;
     }
 
-    public String estaInstalado(Integer idChassi, String boletim1, String boletim2) {
+    public String estaInstaladoAnd(Integer idChassi, String boletim1, String boletim2) {
+        String status = "❌";
         if (verificaBoletim(idChassi, boletim1)) {
-            if (verificaBoletim(idChassi, boletim2)) {
-                
+            if(boletim2!=null) {
+                if (verificaBoletim(idChassi, boletim2)) {
+                    status = "✔";
+                }
+            }else{
+                status = "✔";
             }
         }
+        return status;
     }
+
+    public String estaInstaladoOr(Integer idChassi, String boletim1, String boletim2){
+        String status = "❌";
+        Boolean input1 = verificaBoletim(idChassi,boletim1);
+        Boolean input2 = verificaBoletim(idChassi,boletim2);
+
+        if(input1 || input2){
+            status = "✔";
+        }
+        return status;
+    }
+
 }
