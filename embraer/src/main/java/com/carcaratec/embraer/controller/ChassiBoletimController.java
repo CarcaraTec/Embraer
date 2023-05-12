@@ -24,6 +24,7 @@ public class ChassiBoletimController {
     }
 
     @GetMapping("/findBoletim")
+    @ResponseStatus
     public List<ChassiBoletim> findChassiBoletim(@RequestParam("idChassi") Integer idChassi) {
         List<ChassiBoletim> lista = chassiBoletimRepository.findBoletimByChassi(idChassi);
         return lista;

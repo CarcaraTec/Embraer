@@ -20,7 +20,9 @@ public class VerificacaoHierarquia {
         String[] hierarquiaString = caminho.split("/");
 
         for(int i = 0;i< hierarquiaString.length;i++){
-            listaHierarquia.add(Integer.valueOf(hierarquiaString[i]));
+            if(!hierarquiaString[i].equals("")) {
+                listaHierarquia.add(Integer.valueOf(hierarquiaString[i]));
+            }
         }
         return listaHierarquia;
     }

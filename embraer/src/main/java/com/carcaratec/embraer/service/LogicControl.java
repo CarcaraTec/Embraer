@@ -69,8 +69,6 @@ public class LogicControl extends VerificacaoHierarquia {
                         break;
                     default:status = "";
                 }
-                cadastroItemReturn = new DadosCadastroItemReturn(idItem,nomeItem,status);
-                listItemReturn.add(cadastroItemReturn);
                 //Caso não seja
             }else{
                 //Procura a logica
@@ -93,14 +91,17 @@ public class LogicControl extends VerificacaoHierarquia {
                         }
                             break;
                     }
+
                 }
 
 
             }
+            cadastroItemReturn = new DadosCadastroItemReturn(idItem,nomeItem,status);
+            listItemReturn.add(cadastroItemReturn);
             itemFabrica.put(String.valueOf(listItem.get(i).getIdItem()),fabrica);
         }
-
-        System.out.println(itemFabrica);
+        System.out.println("Quantidade de itens total: "+listItem.size());
+        System.out.println("Quantidade de itens colocados: "+listItemReturn.size());
         return listItemReturn;
     }
 
