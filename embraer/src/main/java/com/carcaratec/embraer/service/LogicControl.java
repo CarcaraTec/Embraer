@@ -1,7 +1,9 @@
 package com.carcaratec.embraer.service;
 
-import com.carcaratec.embraer.model.*;
+import com.carcaratec.embraer.model.dto.*;
+import com.carcaratec.embraer.model.record.DadosCadastroItemReturn;
 import com.carcaratec.embraer.repository.*;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-
-public class LogicControl {
+public class LogicControl extends VerificacaoHierarquia {
     @Autowired
     private ChassiRepository chassiRepository;
 
@@ -23,111 +24,86 @@ public class LogicControl {
     @Autowired
     private ItemRepository itemRepository;
 
-
     @Autowired
     private LogicaBoletimRepository logicaBoletimRepository;
 
     @Autowired
     private LogicaFabricaRepository logicaFabricaRepository;
 
-    public List<ItemReturn> itemsDeal(Integer idChassi, String category){
-        List<ItemReturn> listItemReturn = new ArrayList<>();
-        List<Item> listItem = new ArrayList<>();
+    @Autowired
+    private HierarquiaRepository hierarquiaRepository;
 
-        if(category.equals("all")) {
-            listItem = itemRepository.findAll();
-        }else {
-            listItem = itemRepository.findByCategoria(category);
-        }
+    List<Item> listItem = new ArrayList<>();
 
-        for (Item item : listItem) {
-            ItemReturn itemReturn = new ItemReturn();
+    List<DadosCadastroItemReturn> listItemReturn = new ArrayList<>();
 
-            List<LogicaBoletim> listLogicaBoletim = logicaBoletimRepository.findByItem(item.getIdItem());
+    JSONObject itemFabrica = new JSONObject();
 
-            if(listLogicaBoletim.isEmpty()){
 
-                List<LogicaFabrica> listFabrica = logicaFabricaRepository.findByIdItem(item.getIdItem());
-                itemReturn.setIdItem(item.getIdItem());
-                itemReturn.setNome(item.getNome());
-                if(!listFabrica.isEmpty()){
-                    Integer chassiMinimo = listFabrica.get(0).getChassiMinimo();
-                    if(chassiMinimo<=idChassi){
-                        itemReturn.setStatus("✔");
-                    }else {
-                        itemReturn.setStatus("❌");
-                    }
-                }else {
-                    itemReturn.setStatus("❌");
+    Integer idItem;
+
+    String nomeItem;
+
+    String status;
+
+    public List<DadosCadastroItemReturn> itemsDeal(Integer idChassi, String category){
+        List<Integer> caminhoHierarquia = new ArrayList<>();
+
+        listItem = itemRepository.findAll();
+        //Item é de fabrica
+        for(int i = 0;i< listItem.size();i++){
+            List<Hierarquia> logica = new ArrayList<>();
+            DadosCadastroItemReturn cadastroItemReturn;
+            String fabrica = String.valueOf(logicaFabricaRepository.findItemFactory(idChassi,listItem.get(i).getIdItem()));
+
+            idItem = listItem.get(i).getIdItem();
+
+            nomeItem = listItem.get(i).getNome();
+
+            //Caso seja
+            if(!fabrica.equals("null")){
+                switch (fabrica){
+                    case "1":status = "✔";
+                        break;
+                    case "0":status = "❌";
+                        break;
+                    default:status = "";
                 }
-                listItemReturn.add(itemReturn);
+                //Caso não seja
+            }else{
+                //Procura a logica
+                logica = hierarquiaRepository.findByIdItem(idItem);
+                String boletim1 = logica.get(0).getInput1();
+                String boletim2 = logica.get(0).getInput2();
+                String operador = logica.get(0).getOperacao();
+
+                //Popula a lista do caminho hieraquico
+                caminhoHierarquia = caminhoHierarquia(logica.get(0).getCaminhoHierarquia());
+                //Caso possua só um parametro
+                if(caminhoHierarquia.size()==1){
+                    switch (operador){
+                        case "AND":{
+                            status = estaInstaladoAnd(idChassi,boletim1,boletim2);
+                        }
+                            break;
+                        case "OR":{
+                            status = estaInstaladoOr(idChassi,boletim1,boletim2);
+                        }
+                            break;
+                    }
+
+                }
+
+
             }
-
-            for (LogicaBoletim logicaBoletim : listLogicaBoletim) {
-
-
-
-                Integer idItem = item.getIdItem();
-                String nomeItem = item.getNome();
-                String statusItem1 = "null";
-                String statusItem2 = "null";
-
-                List<ChassiBoletim> listChassiBoletim1 = chassiBoletimRepository.findBoletimByIdAndChassi(logicaBoletim.getInput1(), idChassi);
-                boolean notEmptyBoletim1 = !listChassiBoletim1.isEmpty();
-
-                String operacao = logicaBoletim.getOperacao();
-
-                List<ChassiBoletim> listChassiBoletim2 = chassiBoletimRepository.findBoletimByIdAndChassi(logicaBoletim.getInput2(), idChassi);
-                boolean notEmptyBoletim2 = !listChassiBoletim2.isEmpty();
-
-                if(logicaBoletim.getInput2()==null){
-                    operacao = "OR";
-                }
-
-                if (notEmptyBoletim1) {
-                    if (listChassiBoletim1.get(0).getStatus().equals("INCORPORATED")) {
-                        statusItem1 = "INCORPORATED";
-                    } else {
-                        statusItem1 = "APPLICABLE";
-                    }
-                }
-                if (notEmptyBoletim2) {
-                    if (listChassiBoletim2.get(0).getStatus().equals("INCORPORATED")) {
-                        statusItem2 = "INCORPORATED";
-                    } else {
-                        statusItem2 = "APPLICABLE";
-                    }
-                }
-                itemReturn.setIdItem(idItem);
-                itemReturn.setNome(nomeItem);
-
-                if(operacao.contains("OR")) {
-                    if(notEmptyBoletim1 || notEmptyBoletim2) {
-                        if (statusItem1.contains("INCORPORATED") || statusItem2.contains("INCORPORATED")) {
-                            itemReturn.setStatus("✔");
-                        } else {
-                            itemReturn.setStatus("❌");
-                        }
-                    }else {
-                        itemReturn.setStatus("❌");
-                    }
-                }else if(operacao.contains("AND")){
-                    if(notEmptyBoletim1 && notEmptyBoletim2) {
-                        if (statusItem1.contains("INCORPORATED") && statusItem2.contains("INCORPORATED")) {
-                            itemReturn.setStatus("✔");
-                        } else {
-                            itemReturn.setStatus("❌");
-                        }
-                    }else{
-                        itemReturn.setStatus("❌");
-                    }
-                }
-                if(listItemReturn.contains(itemReturn)){
-
-                }else {
-                listItemReturn.add(itemReturn);
-            }}
+            cadastroItemReturn = new DadosCadastroItemReturn(idItem,nomeItem,status);
+            listItemReturn.add(cadastroItemReturn);
+            itemFabrica.put(String.valueOf(listItem.get(i).getIdItem()),fabrica);
         }
+        System.out.println("Quantidade de itens total: "+listItem.size());
+        System.out.println("Quantidade de itens colocados: "+listItemReturn.size());
         return listItemReturn;
     }
+
+
 }
