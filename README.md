@@ -71,7 +71,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 
 ## 🤓 **DATA MODELING**
-![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
+![modeling](https://github.com/CarcaraTec/Embraer/blob/0e9b676f9e8170ddc94d9d8e9a5cd8e489cf7438/Database/diagrama%20embraer.png)
 
 ## 📉 **BURNDOWN**
 
