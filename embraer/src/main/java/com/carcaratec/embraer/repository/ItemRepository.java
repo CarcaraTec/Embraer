@@ -12,4 +12,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 
     @Query(value = "SELECT DISTINCT CATEGORIA FROM ITEM",nativeQuery = true)
     List<String> findCategory();
+
+    List<Item> findAllByIdItem(int i);
+
+    List<Item> findAllByCategoria(String category);
 }

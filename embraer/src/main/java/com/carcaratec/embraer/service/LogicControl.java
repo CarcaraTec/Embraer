@@ -50,7 +50,7 @@ public class LogicControl extends VerificacaoHierarquia {
 
     public List<DadosCadastroItemReturn> itemsDeal(Integer idChassi, String category) {
         List<DadosCadastroItemReturn> listItemReturn = new ArrayList<>();
-        List<Item> listItem = itemRepository.findAll();
+        List<Item> listItem = category.equals("all") ? itemRepository.findAll() : itemRepository.findAllByCategoria(category);
         for (Item item : listItem) {
             DadosCadastroItemReturn cadastroItemReturn;
             String fabrica = String.valueOf(logicaFabricaRepository.findItemFactory(idChassi, item.getIdItem()));
@@ -67,7 +67,7 @@ public class LogicControl extends VerificacaoHierarquia {
                     Integer dependencia = logica.get(0).getDependencia();
                     String boletim1 = produto ? logica.get(0).getInput2() : logica.get(0).getInput1();
                     String boletim2 = logica.get(0).getInput2();
-                    String operador = logica.get(0).getOperacao();
+                    String operador = logica.get(0).getOperacao().replaceAll(" ","");
 
                     if (dependencia != null && !produto) {
                         logica = hierarquiaRepository.findByIdLogica(dependencia);
@@ -75,6 +75,7 @@ public class LogicControl extends VerificacaoHierarquia {
                     } else {
                         produto = false;
                     }
+
                     switch (operador) {
                         case "AND":
                             status = estaInstaladoAnd(idChassi, boletim1, boletim2);

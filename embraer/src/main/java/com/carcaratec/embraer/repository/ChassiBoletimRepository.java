@@ -1,5 +1,6 @@
 package com.carcaratec.embraer.repository;
 
+import com.carcaratec.embraer.model.ChassiBoletimPK;
 import com.carcaratec.embraer.model.dto.ChassiBoletim;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Repository
 
-public interface ChassiBoletimRepository extends JpaRepository<ChassiBoletim, Integer> {
+public interface ChassiBoletimRepository extends JpaRepository<ChassiBoletim, ChassiBoletimPK> {
 
     @Transactional
     @Modifying

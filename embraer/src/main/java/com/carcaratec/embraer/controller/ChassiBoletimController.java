@@ -1,9 +1,12 @@
 package com.carcaratec.embraer.controller;
 
+import com.carcaratec.embraer.model.dto.BoletimServico;
 import com.carcaratec.embraer.model.dto.Chassi;
 import com.carcaratec.embraer.model.dto.ChassiBoletim;
+import com.carcaratec.embraer.model.record.DadosCadastroBoletim;
 import com.carcaratec.embraer.model.record.DadosCadastroChassi;
 import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
+import com.carcaratec.embraer.repository.BoletimServicoRepository;
 import com.carcaratec.embraer.repository.ChassiBoletimRepository;
 import com.carcaratec.embraer.repository.ChassiRepository;
 import jakarta.transaction.Transactional;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,13 +29,16 @@ public class ChassiBoletimController {
     @Autowired
     private ChassiRepository chassiRepository;
 
+    @Autowired
+    private BoletimServicoRepository boletimServicoRepository;
+
+
     @PostMapping("/insertChassiBoletim")
     public void insertChassiBoletim(@RequestBody DadosCadastroChassiBoletim dados) {
         chassiBoletimRepository.save(new ChassiBoletim(dados));
     }
 
     @GetMapping("/findBoletim")
-    @ResponseStatus
     public List<ChassiBoletim> findChassiBoletim(@RequestParam("idChassi") Integer idChassi) {
         List<ChassiBoletim> lista = chassiBoletimRepository.findBoletimByChassi(idChassi);
         return lista;
@@ -64,33 +71,40 @@ public class ChassiBoletimController {
     @Transactional
     @PostMapping("/loadData")
     public void loadData(@RequestBody String stringJson) {
-
         JSONObject json = new JSONObject(stringJson);
-
-
         JSONArray data = new JSONArray(json.get("data").toString());
-
         System.out.println(data);
 
         String chassiString = "";
-
         Integer chassi = 0;
+
+        List<BoletimServico> boletimServicoList = new ArrayList<>();
+        List<ChassiBoletim> chassiBoletimList = new ArrayList<>();
 
         for (int i = 0; i < data.length(); i++) {
             JSONObject chassiBoletim0 = new JSONObject(data.get(i).toString());
             if (i == 0) {
                 chassiString = chassiBoletim0.get("Chassis").toString().replaceAll("[^0-9]", "");
-
                 chassi = Integer.valueOf(chassiString);
-
-                Chassi chass = new Chassi(new DadosCadastroChassi(chassi,"teste"));
-
+                Chassi chass = new Chassi(new DadosCadastroChassi(chassi, "Admin"));
                 chassiRepository.save(chass);
             } else if (i > 0) {
-                DadosCadastroChassiBoletim dados = new DadosCadastroChassiBoletim(chassi, chassiBoletim0.get("Boletim de serviço").toString(),
+                String boletim = chassiBoletim0.get("Boletim de serviço").toString();
+                DadosCadastroBoletim dadosCadastroBoletim = new DadosCadastroBoletim(boletim, "");
+                DadosCadastroChassiBoletim dados = new DadosCadastroChassiBoletim(chassi, boletim,
                         chassiBoletim0.get("Status").toString());
-                chassiBoletimRepository.save(new ChassiBoletim(dados));
+                boletimServicoList.add(new BoletimServico(dadosCadastroBoletim));
+                chassiBoletimList.add(new ChassiBoletim(dados));
             }
         }
+        boletimServicoRepository.saveAll(boletimServicoList);
+        chassiBoletimRepository.saveAll(chassiBoletimList);
     }
+
+
+    @PostMapping("/chassi")
+    public void testeChassi (@RequestBody DadosCadastroChassi dados){
+        chassiRepository.save(new Chassi(dados));
+    }
+
 }
