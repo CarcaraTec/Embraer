@@ -1,8 +1,12 @@
 package com.carcaratec.embraer.controller;
 
+import com.carcaratec.embraer.model.dto.Chassi;
 import com.carcaratec.embraer.model.dto.ChassiBoletim;
+import com.carcaratec.embraer.model.record.DadosCadastroChassi;
 import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
 import com.carcaratec.embraer.repository.ChassiBoletimRepository;
+import com.carcaratec.embraer.repository.ChassiRepository;
+import jakarta.transaction.Transactional;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +22,11 @@ public class ChassiBoletimController {
     @Autowired
     private ChassiBoletimRepository chassiBoletimRepository;
 
+    @Autowired
+    private ChassiRepository chassiRepository;
+
     @PostMapping("/insertChassiBoletim")
-    public void insertChassiBoletim(@RequestBody DadosCadastroChassiBoletim dados){
+    public void insertChassiBoletim(@RequestBody DadosCadastroChassiBoletim dados) {
         chassiBoletimRepository.save(new ChassiBoletim(dados));
     }
 
@@ -54,4 +61,36 @@ public class ChassiBoletimController {
         return ResponseEntity.ok().build();
     }
 
+    @Transactional
+    @PostMapping("/loadData")
+    public void loadData(@RequestBody String stringJson) {
+
+        JSONObject json = new JSONObject(stringJson);
+
+
+        JSONArray data = new JSONArray(json.get("data").toString());
+
+        System.out.println(data);
+
+        String chassiString = "";
+
+        Integer chassi = 0;
+
+        for (int i = 0; i < data.length(); i++) {
+            JSONObject chassiBoletim0 = new JSONObject(data.get(i).toString());
+            if (i == 0) {
+                chassiString = chassiBoletim0.get("Chassis").toString().replaceAll("[^0-9]", "");
+
+                chassi = Integer.valueOf(chassiString);
+
+                Chassi chass = new Chassi(new DadosCadastroChassi(chassi,"teste"));
+
+                chassiRepository.save(chass);
+            } else if (i > 0) {
+                DadosCadastroChassiBoletim dados = new DadosCadastroChassiBoletim(chassi, chassiBoletim0.get("Boletim de serviço").toString(),
+                        chassiBoletim0.get("Status").toString());
+                chassiBoletimRepository.save(new ChassiBoletim(dados));
+            }
+        }
+    }
 }

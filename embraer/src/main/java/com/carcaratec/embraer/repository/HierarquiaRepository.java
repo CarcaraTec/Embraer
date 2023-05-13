@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface HierarquiaRepository extends JpaRepository<Hierarquia, Integer> {
 
+    List<Hierarquia> findByIdItemOrderByNivelDesc(Integer idItem);
     List<Hierarquia> findByIdItem(Integer idItem);
+    List<Hierarquia> findByIdLogica(Integer idLogica);
 }
