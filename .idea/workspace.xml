@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="56bcae1e-29d9-4276-b5be-3331493d34bc" name="Changes" comment="" />
+    <list default="true" id="56bcae1e-29d9-4276-b5be-3331493d34bc" name="Changes" comment="change folder and files html for .vue">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/controller/ChassiBoletimController.class" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/controller/ChassiBoletimController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/model/ChassiBoletimPK.class" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/model/ChassiBoletimPK.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/model/dto/ChassiBoletim.class" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/model/dto/ChassiBoletim.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/repository/ChassiBoletimRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/repository/ChassiBoletimRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/repository/HierarquiaRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/embraer/target/classes/com/carcaratec/embraer/repository/HierarquiaRepository.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +35,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL\Documents\GitHub\Embraer\embraer front-end\vue-app\src\components" />
       <recent name="C:\Users\DELL\Documents\GitHub\Embraer\embraer\src\main\resources\templates" />
     </key>
   </component>
@@ -40,6 +48,14 @@
       <option name="presentableId" value="Default" />
       <updated>1679353637307</updated>
     </task>
+    <task id="LOCAL-00001" summary="change folder and files html for .vue">
+      <created>1684009205144</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684009205145</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -52,5 +68,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="change folder and files html for .vue" />
+    <option name="LAST_COMMIT_MESSAGE" value="change folder and files html for .vue" />
   </component>
 </project>
