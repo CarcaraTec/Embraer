@@ -38,72 +38,64 @@ public class LogicControl extends VerificacaoHierarquia {
     List<DadosCadastroItemReturn> listItemReturn = new ArrayList<>();
 
     JSONObject itemFabrica = new JSONObject();
-
-
+    List<Hierarquia> listHierarquia = new ArrayList<>();
+    Integer idLogica;
+    Integer dependencia;
     Integer idItem;
 
     String nomeItem;
-
+    Boolean produto = false;
     String status;
+    String boletim1 = "";
 
-    public List<DadosCadastroItemReturn> itemsDeal(Integer idChassi, String category){
-        List<Integer> caminhoHierarquia = new ArrayList<>();
-
-        listItem = itemRepository.findAll();
-        //Item é de fabrica
-        for(int i = 0;i< listItem.size();i++){
-            List<Hierarquia> logica = new ArrayList<>();
+    public List<DadosCadastroItemReturn> itemsDeal(Integer idChassi, String category) {
+        List<DadosCadastroItemReturn> listItemReturn = new ArrayList<>();
+        List<Item> listItem = category.equals("all") ? itemRepository.findAll() : itemRepository.findAllByCategoria(category);
+        for (Item item : listItem) {
             DadosCadastroItemReturn cadastroItemReturn;
-            String fabrica = String.valueOf(logicaFabricaRepository.findItemFactory(idChassi,listItem.get(i).getIdItem()));
+            String fabrica = String.valueOf(logicaFabricaRepository.findItemFactory(idChassi, item.getIdItem()));
+            String status = "";
+            if (!fabrica.equals("null")) {
+                status = fabrica.equals("1") ? "✔" : "❌";
+            } else {
+                List<Hierarquia> logica = new ArrayList<>();
+                boolean produto = false;
+                Integer idLogica = hierarquiaRepository.findByIdItemOrderByNivelDesc(item.getIdItem()).get(0).getIdLogica();
 
-            idItem = listItem.get(i).getIdItem();
+                while (true) {
+                    logica = hierarquiaRepository.findByIdLogica(idLogica);
+                    Integer dependencia = logica.get(0).getDependencia();
+                    String boletim1 = produto ? logica.get(0).getInput2() : logica.get(0).getInput1();
+                    String boletim2 = logica.get(0).getInput2();
+                    String operador = logica.get(0).getOperacao().replaceAll(" ","");
 
-            nomeItem = listItem.get(i).getNome();
-
-            //Caso seja
-            if(!fabrica.equals("null")){
-                switch (fabrica){
-                    case "1":status = "✔";
-                        break;
-                    case "0":status = "❌";
-                        break;
-                    default:status = "";
-                }
-                //Caso não seja
-            }else{
-                //Procura a logica
-                logica = hierarquiaRepository.findByIdItem(idItem);
-                String boletim1 = logica.get(0).getInput1();
-                String boletim2 = logica.get(0).getInput2();
-                String operador = logica.get(0).getOperacao();
-
-                //Popula a lista do caminho hieraquico
-                caminhoHierarquia = caminhoHierarquia(logica.get(0).getCaminhoHierarquia());
-                //Caso possua só um parametro
-                if(caminhoHierarquia.size()==1){
-                    switch (operador){
-                        case "AND":{
-                            status = estaInstaladoAnd(idChassi,boletim1,boletim2);
-                        }
-                            break;
-                        case "OR":{
-                            status = estaInstaladoOr(idChassi,boletim1,boletim2);
-                        }
-                            break;
+                    if (dependencia != null && !produto) {
+                        logica = hierarquiaRepository.findByIdLogica(dependencia);
+                        produto = true;
+                    } else {
+                        produto = false;
                     }
 
+                    switch (operador) {
+                        case "AND":
+                            status = estaInstaladoAnd(idChassi, boletim1, boletim2);
+                            break;
+                        case "OR":
+                            status = estaInstaladoOr(idChassi, boletim1, boletim2);
+                            break;
+                    }
+                    if (!produto) {
+                        break;
+                    }
                 }
-
-
             }
-            cadastroItemReturn = new DadosCadastroItemReturn(idItem,nomeItem,status);
+            cadastroItemReturn = new DadosCadastroItemReturn(item.getIdItem(), item.getNome(), status);
             listItemReturn.add(cadastroItemReturn);
-            itemFabrica.put(String.valueOf(listItem.get(i).getIdItem()),fabrica);
+            itemFabrica.put(String.valueOf(item.getIdItem()), fabrica);
         }
-        System.out.println("Quantidade de itens total: "+listItem.size());
-        System.out.println("Quantidade de itens colocados: "+listItemReturn.size());
+        System.out.println("Quantidade de itens total: " + listItem.size());
+        System.out.println("Quantidade de itens colocados: " + listItemReturn.size());
+
         return listItemReturn;
     }
-
-
 }

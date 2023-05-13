@@ -85,7 +85,7 @@
                   console.log(results);
 
 
-                  axios.post('http://localhost:8080/loadData', results)
+                  axios.post('http://localhost:8080/chassiBoletim/loadData', results)
                       .then((response) => {
                         console.log(response.data); // aqui você pode acessar os resultados
                       })

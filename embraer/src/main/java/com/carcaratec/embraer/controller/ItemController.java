@@ -60,11 +60,11 @@ public class ItemController {
         return listItemReturn;
     }
 
-//    @GetMapping("/logicaByCategory")
-//    public List<DadosCadastroItemReturn> logicaCategory(@RequestParam("idChassi") Integer idChassi, @RequestParam("category") String category) {
-//        List<DadosCadastroItemReturn> listItemReturn = logicControl.itemsDeal(idChassi, category.toLowerCase());
-//        return listItemReturn;
-//    }
+    @GetMapping("/logicaByCategory")
+    public List<DadosCadastroItemReturn> logicaCategory(@RequestParam("idChassi") Integer idChassi, @RequestParam("category") String category) {
+        List<DadosCadastroItemReturn> listItemReturn = logicControl.itemsDeal(idChassi, category.toLowerCase());
+        return listItemReturn;
+    }
 
     @GetMapping("/hierarquia")
     public List<Hierarquia> findHierarquia() {
