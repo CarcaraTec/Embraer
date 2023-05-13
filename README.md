@@ -22,7 +22,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [x] **SPRINT 2** - 03/04/2023 a 23/04/2023
 
-- [ ] **SPRINT 3** - 24/04/2023 a 14/05/2023
+- [x] **SPRINT 3** - 24/04/2023 a 14/05/2023
 
 - [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
 
@@ -71,7 +71,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 
 ## 🤓 **DATA MODELING**
-![modeling](https://github.com/CarcaraTec/Embraer/blob/0b156ad919d4eb208e279229f70102e46f81e3be/Database/diagrama%20embraer.png)
+![modeling](https://github.com/CarcaraTec/Embraer/blob/0e9b676f9e8170ddc94d9d8e9a5cd8e489cf7438/Database/diagrama%20embraer.png)
 
 ## 📉 **BURNDOWN**
 
@@ -109,6 +109,6 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 ## 👪 **TEAM**
 
-![team](https://github.com/CarcaraTec/Embraer/blob/6c43e6e09e3922b10e031b7ae7a109ea76949c12/Documents/images/Team.png)
+![team](https://github.com/CarcaraTec/Embraer/blob/8b3722a47c397ac5c7e77f9957fce580bacce68c/Documents/images/Team.png)
 
 ![logoparceria](https://github.com/CarcaraTec/Embraer/blob/9b4b5521fbbbe12d7fb0e050b68b0589fa078a8a/Documents/images/Logo_parceria.png)
