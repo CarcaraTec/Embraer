@@ -86,7 +86,7 @@ public class ChassiBoletimController {
             if (i == 0) {
                 chassiString = chassiBoletim0.get("Chassis").toString().replaceAll("[^0-9]", "");
                 chassi = Integer.valueOf(chassiString);
-                Chassi chass = new Chassi(new DadosCadastroChassi(chassi, "Admin"));
+                Chassi chass = new Chassi(new DadosCadastroChassi(chassi));
                 chassiRepository.save(chass);
             } else if (i > 0) {
                 String boletim = chassiBoletim0.get("Boletim de serviço").toString();

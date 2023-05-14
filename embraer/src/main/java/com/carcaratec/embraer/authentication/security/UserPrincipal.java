@@ -1,56 +1,54 @@
 package com.carcaratec.embraer.authentication.security;
 
-import com.carcaratec.embraer.model.dto.Usuario;
-import com.carcaratec.embraer.repository.PermissaoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.carcaratec.embraer.model.dto.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
 public class UserPrincipal implements UserDetails {
 
-    @Autowired
-    PermissaoRepository permissaoRepository;
+    private String username;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    private String nome;
+    public UserPrincipal(User user) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
 
-    private String senha;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-    private Collection<? extends GrantedAuthority> permissao;
-
-    public UserPrincipal (Usuario usuario){
-        this.nome = usuario.getNome();
-        this.senha = usuario.getSenha();
-        List<SimpleGrantedAuthority> permissoes = new ArrayList<>();
-
-        permissoes = usuario.getRoles().stream().map(role ->{
+        // ROLE_ADMIN , ROLE_USER ADMIN, USER ....
+        authorities = user.getRoles().stream().map(role -> {
             return new SimpleGrantedAuthority("ROLE_".concat(role.getName()));
         }).collect(Collectors.toList());
-        this.permissao = permissoes;
+
+        this.authorities = authorities;
+
     }
 
-    public static UserPrincipal create(Usuario usuario){
-        return new UserPrincipal(usuario);
+    public static UserPrincipal create(User user) {
+        return new UserPrincipal(user);
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return permissao;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return senha;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return nome;
+        return username;
     }
 
     @Override
@@ -72,4 +70,5 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
