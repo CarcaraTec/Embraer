@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "CHASSI_BOLETIM")
@@ -27,6 +27,9 @@ public class ChassiBoletim {
 
     @Column(name = "STATUS")
     private String status;
+
+    @Column(name = "MODIFICADO_POR")
+    private UUID modificadoPor;
 
     public ChassiBoletim(DadosCadastroChassiBoletim dados){
         this.idChassi = dados.idChassi();

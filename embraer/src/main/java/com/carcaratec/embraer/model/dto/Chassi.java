@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 
 @Entity(name = "chassi")
@@ -19,8 +20,8 @@ public class Chassi{
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
 
-//    @Column(name = "PROPRIETARIO")
-//    private String proprietario;
+    @Column(name = "PROPRIETARIO")
+    private UUID proprietario;
 
 
     public Chassi(DadosCadastroChassi dados) {
