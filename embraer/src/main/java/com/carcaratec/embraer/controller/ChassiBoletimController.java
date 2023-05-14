@@ -9,13 +9,13 @@ import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
 import com.carcaratec.embraer.repository.BoletimServicoRepository;
 import com.carcaratec.embraer.repository.ChassiBoletimRepository;
 import com.carcaratec.embraer.repository.ChassiRepository;
-import jakarta.transaction.Transactional;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +86,7 @@ public class ChassiBoletimController {
             if (i == 0) {
                 chassiString = chassiBoletim0.get("Chassis").toString().replaceAll("[^0-9]", "");
                 chassi = Integer.valueOf(chassiString);
-                Chassi chass = new Chassi(new DadosCadastroChassi(chassi, "Admin"));
+                Chassi chass = new Chassi(new DadosCadastroChassi(chassi));
                 chassiRepository.save(chass);
             } else if (i > 0) {
                 String boletim = chassiBoletim0.get("Boletim de serviço").toString();

@@ -1,10 +1,11 @@
 package com.carcaratec.embraer.model.dto;
 
 import com.carcaratec.embraer.model.record.DadosCadastroChassi;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 
 @Entity(name = "chassi")
@@ -18,12 +19,12 @@ public class Chassi{
     @Column(name = "ID_CHASSI", nullable = false)
     private Integer idChassi;
 
-    @Column(name = "PROPRIETARIO")
-    private String proprietario;
+//    @Column(name = "PROPRIETARIO")
+//    private String proprietario;
 
 
     public Chassi(DadosCadastroChassi dados) {
         this.idChassi = dados.idChassi();
-        this.proprietario = dados.proprietario();
+//        this.proprietario = dados.proprietario();
     }
 }
