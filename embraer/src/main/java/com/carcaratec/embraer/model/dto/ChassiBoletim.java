@@ -2,11 +2,12 @@ package com.carcaratec.embraer.model.dto;
 
 import com.carcaratec.embraer.model.ChassiBoletimPK;
 import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CHASSI_BOLETIM")

@@ -4,11 +4,11 @@ import com.carcaratec.embraer.model.dto.Chassi;
 import com.carcaratec.embraer.model.record.DadosCadastroChassi;
 import com.carcaratec.embraer.model.record.DadosListagemChassi;
 import com.carcaratec.embraer.repository.ChassiRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @RestController

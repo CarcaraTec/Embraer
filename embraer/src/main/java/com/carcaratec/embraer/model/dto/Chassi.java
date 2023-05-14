@@ -1,10 +1,11 @@
 package com.carcaratec.embraer.model.dto;
 
 import com.carcaratec.embraer.model.record.DadosCadastroChassi;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 
 @Entity(name = "chassi")
