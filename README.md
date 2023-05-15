@@ -44,8 +44,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
    * Generate PDF on the platform  
 
 * **SPRINT 3**
-  * Creation of access profiles (admin, editor and driver)
-  * Insert notification in the system
+  * Statistics
   * User Manual
 
 * **SPRINT 4**
