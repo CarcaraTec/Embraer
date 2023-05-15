@@ -75,7 +75,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 ## 📉 **BURNDOWN**
 
-![burndown](https://github.com/CarcaraTec/Embraer/blob/ce26c62391e44459d0ca6e7679d832bbcc67fa84/Documents/images/burdown.png)
+![burndown](https://github.com/CarcaraTec/Embraer/blob/157fcbea618fabda65a987e02bd58511133a88bb/Documents/images/burdown%20sprint%203.png)
 
 ## 💻 **TECHNOLOGY AND TOOLS**
 
