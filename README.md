@@ -45,12 +45,15 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 * **SPRINT 3**
   * Statistics
-  * User Manual
+  * Authentication (admin)
+  * Upload for new data files
 
 * **SPRINT 4**
   * Audit
-  * Login with SSO
+  * Authentication (editor, driver)
+  * Rule editor
   * Push Notification Development
+  * User Manual
 
 ## 📔 **FUNCTIONAL REQUIREMENTS**
 
