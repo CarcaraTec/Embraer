@@ -1,5 +1,6 @@
 package com.carcaratec.embraer.controller;
 
+import com.carcaratec.embraer.model.ChassiBoletimPK;
 import com.carcaratec.embraer.model.dto.BoletimServico;
 import com.carcaratec.embraer.model.dto.Chassi;
 import com.carcaratec.embraer.model.dto.ChassiBoletim;
@@ -9,10 +10,14 @@ import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
 import com.carcaratec.embraer.repository.BoletimServicoRepository;
 import com.carcaratec.embraer.repository.ChassiBoletimRepository;
 import com.carcaratec.embraer.repository.ChassiRepository;
+import com.carcaratec.embraer.repository.UsuarioRepository;
+import oracle.ucp.proxy.annotation.Post;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -31,6 +36,9 @@ public class ChassiBoletimController {
 
     @Autowired
     private BoletimServicoRepository boletimServicoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
 
     @PostMapping("/insertChassiBoletim")
@@ -66,6 +74,18 @@ public class ChassiBoletimController {
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    @Transactional
+    @PostMapping("atualizar")
+    public void atualizar (@RequestBody ChassiBoletim chassiBoletim, @AuthenticationPrincipal UserDetails userDetails){
+        ChassiBoletimPK chassiBoletimPK = new ChassiBoletimPK(chassiBoletim.getIdChassi(),chassiBoletim.getIdBoletim());
+        var chassi = chassiBoletimRepository.getReferenceById(chassiBoletimPK);
+        chassiBoletim.setModificadoPor(usuarioRepository.findByUsername(userDetails.getUsername()).getId());
+
+
+        chassi.atualizar(chassiBoletim);
+
     }
 
     @Transactional

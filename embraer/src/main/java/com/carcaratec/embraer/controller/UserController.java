@@ -4,10 +4,13 @@ import com.carcaratec.embraer.model.dto.CreateUserRoleDTO;
 import com.carcaratec.embraer.model.dto.User;
 import com.carcaratec.embraer.service.CreateRoleUserService;
 import com.carcaratec.embraer.service.CreateUserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import javax.transaction.Transactional;
 
 
 @RestController
@@ -19,6 +22,8 @@ public class UserController {
 
     @Autowired
     CreateRoleUserService createRoleUserService;
+
+
 
     @PostMapping("/create")
     public User create(@RequestBody User user) {
@@ -34,9 +39,21 @@ public class UserController {
     @ResponseBody
     public String getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
         if (userDetails != null) {
-            return userDetails.getUsername();
+
+            JSONObject user = new JSONObject();
+            user.put("user",userDetails.getUsername());
+            user.put("authorities",userDetails.getAuthorities());
+            return user.toString();
         }
         return "Nenhum usuário logado";
+    }
+
+
+    @Transactional
+    @PostMapping("/login")
+    public void login (@RequestBody String user){
+        System.out.println("123");
+        System.out.println(user);
     }
 
 
