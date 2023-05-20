@@ -36,4 +36,11 @@ public class ChassiBoletim {
         this.idBoletim = dados.idBoletim();
         this.status = dados.status();
     }
+
+    public void atualizar (ChassiBoletim chassiBoletim){
+        this.idChassi = chassiBoletim.getIdChassi();
+        this.idBoletim = chassiBoletim.idBoletim;
+        this.status = chassiBoletim.getStatus();
+        this.modificadoPor = chassiBoletim.getModificadoPor();
+    }
 }
