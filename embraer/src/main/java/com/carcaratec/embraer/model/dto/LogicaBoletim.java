@@ -1,10 +1,7 @@
 package com.carcaratec.embraer.model.dto;
 
 import com.carcaratec.embraer.model.record.DadosCadastroLogicaBoletim;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +13,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
+@Data
 public class LogicaBoletim {
 
+    @Id
     @Column(name = "ID_LOGICA", nullable = false)
     private Integer idLogica;
 
@@ -33,7 +32,6 @@ public class LogicaBoletim {
     @Column(name = "DEPENDENCIA")
     private String dependencia;
 
-    @Id
     @Column(name = "ID_ITEM")
     private Integer idItem;
 
@@ -43,5 +41,20 @@ public class LogicaBoletim {
         this.input2 = dados.input2();
         this.operacao = dados.operacao();
         this.dependencia = dados.dependencia();
+    }
+
+    public void atualizarLogica(LogicaBoletim logicaBoletim){
+        if (!(logicaBoletim.getInput1() == null) && !(logicaBoletim.getInput1().equals(""))) {
+            this.input1 = logicaBoletim.getInput1();
+        }
+        if (!(logicaBoletim.getInput2() == null) && !(logicaBoletim.getInput2().equals(""))) {
+            this.input2 = logicaBoletim.getInput2();
+        }
+        if (!(logicaBoletim.getOperacao() == null) && !(logicaBoletim.getOperacao().equals(""))) {
+            this.operacao = logicaBoletim.getOperacao();
+        }
+        if (!(logicaBoletim.getDependencia() == null) && !(logicaBoletim.getDependencia().equals(""))) {
+            this.dependencia = logicaBoletim.getDependencia();
+        }
     }
 }
