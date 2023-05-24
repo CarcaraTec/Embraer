@@ -6,10 +6,7 @@ import com.carcaratec.embraer.model.dto.Hierarquia;
 import com.carcaratec.embraer.model.dto.Item;
 import com.carcaratec.embraer.model.dto.LogicaBoletim;
 import com.carcaratec.embraer.model.record.DadosCadastroItemReturn;
-import com.carcaratec.embraer.repository.HierarquiaRepository;
-import com.carcaratec.embraer.repository.ItemRepository;
-import com.carcaratec.embraer.repository.LogicaBoletimRepository;
-import com.carcaratec.embraer.repository.LogicaFabricaRepository;
+import com.carcaratec.embraer.repository.*;
 import com.carcaratec.embraer.service.LogicControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,6 +32,9 @@ public class ItemController {
 
     @Autowired
     private LogicaFabricaRepository logicaFabricaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private HierarquiaRepository hierarquiaRepository;
@@ -88,6 +88,7 @@ public class ItemController {
     @PutMapping("alterarLogica")
     public void atualizar (@RequestBody LogicaBoletim logicaBoletim, @AuthenticationPrincipal UserDetails userDetails){
         var logica = logicaBoletimRepository.getReferenceById(logicaBoletim.getIdLogica());
+        logica.setModificadoPor(usuarioRepository.findByUsername(userDetails.getUsername()).getId());
         logica.atualizarLogica(logicaBoletim);
     }
 }

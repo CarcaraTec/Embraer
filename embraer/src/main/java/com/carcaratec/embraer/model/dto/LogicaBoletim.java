@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
+
 @Entity
 @Table(name = "LOGICA_BOLETIM")
 @AllArgsConstructor
@@ -35,6 +37,9 @@ public class LogicaBoletim {
     @Column(name = "ID_ITEM")
     private Integer idItem;
 
+    @Column(name = "MODIFICADO_POR")
+    private UUID modificadoPor;
+
     public LogicaBoletim(DadosCadastroLogicaBoletim dados){
         this.idLogica = dados.idLogica();
         this.input1 = dados.input1();
@@ -55,6 +60,9 @@ public class LogicaBoletim {
         }
         if (!(logicaBoletim.getDependencia() == null) && !(logicaBoletim.getDependencia().equals(""))) {
             this.dependencia = logicaBoletim.getDependencia();
+        }
+        if (!(logicaBoletim.getModificadoPor() == null) && !(logicaBoletim.getModificadoPor().equals(""))) {
+            this.modificadoPor = logicaBoletim.getModificadoPor();
         }
     }
 }
