@@ -2,10 +2,8 @@ package com.carcaratec.embraer.model.dto;
 
 import com.carcaratec.embraer.model.ChassiBoletimPK;
 import com.carcaratec.embraer.model.record.DadosCadastroChassiBoletim;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -16,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Data
 public class ChassiBoletim {
     @Id
     @Column(name = "ID_CHASSI", nullable = false)

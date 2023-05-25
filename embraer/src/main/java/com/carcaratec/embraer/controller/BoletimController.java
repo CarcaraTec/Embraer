@@ -25,4 +25,9 @@ public class BoletimController {
         List<BoletimServico> list = boletimServicoRepository.findAll();
         return list;
     }
+
+
+    public void setBoletimServicoRepository(BoletimServicoRepository boletimServicoRepository) {
+        this.boletimServicoRepository = boletimServicoRepository;
+    }
 }
