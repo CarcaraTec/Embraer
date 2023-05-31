@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/c9fd3db041.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <title>Embraer App</title>
+    <link rel="icon" href="https://companieslogo.com/img/orig/ERJ-dcd6dcae.png?t=1593008465">
+</head>
+<body>
+
+<style>
+
+            .bg-primary2 {
+            background-color: rgb(11, 27, 91);
+            }
+
+            .btn-primary {
+              color: #fff;
+              background-color: rgb(11, 27, 91);
+              border-color: #fff;
+            }
+
+            .logo-container {
+              background-color: rgb(11, 27, 91);
+              color: #FFF;
+            }
+            .fa-solid {
+            margin-right: 20px;
+            margin-left: 20px;
+            }
+
+        </style>
+
+<div class="logo-container p-3 d-flex justify-content-between">
+    <a href="index.html"><i class="fa-solid fa-house mt-2"></i></a>
+    <img src="logo.embraer.png">
+    <div>
+        <i class="fa-solid fa-bell"></i>
+        <i class="fa-solid fa-user mt-2"></i>
+    </div>
+</div>
+
+<div class="row mt-5 justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary2 text-white"></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="container">
+                        <div class="input-group mb-3">
+                            <input class="form-control" type="file" id="uploadfile" accept=".csv">
+                            <button type="button" id="uploadconfirm" class="btn btn-primary my-sm-0">Upload</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+            const uploadconfirm = document.getElementById('uploadconfirm').
+              addEventListener('click', () => {
+              Papa.parse(document.getElementById('uploadfile').files[0],
+              {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results){
+                  console.log(results);
+
+
+                  axios.post('http://localhost:8080/chassiBoletim/loadData', results)
+                      .then((response) => {
+                        console.log(response.data); // aqui você pode acessar os resultados
+                      })
+                      .catch((error) => {
+                        console.log(error);
+                  });
+
+
+                }
+              });
+            });
+        </script>
+</body>
+</html>
