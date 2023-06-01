@@ -1,0 +1,81 @@
+-- view que retorna o caminho hierarquico das logicas
+CREATE OR REPLACE VIEW v_hierarquia AS SELECT id_logica, logica_boletim.id_Item, ITEM.NOME, input1, operacao,  input2, dependencia,  LEVEL AS nivel, 
+CONNECT_BY_ROOT(ID_logica) AS no_raiz, SYS_CONNECT_BY_PATH(ID_logica, '/') AS caminho_hierarquia
+FROM Logica_Boletim
+JOIN item ON logica_boletim.id_item = item.id_item
+START WITH dependencia IS NULL
+CONNECT BY PRIOR ID_logica = dependencia;
+
+-- quantidade de boletim por chassi, quantidade de applicable, quantidade de incorporated
+CREATE OR REPLACE VIEW v_qtd_boletim_status_por_chassi AS
+SELECT cb.ID_CHASSI,
+       COUNT(*) AS quantidade_total,
+       COUNT(CASE WHEN cb.STATUS = 'APPLICABLE' THEN 1 END) AS quantidade_applicable,
+       COUNT(CASE WHEN cb.STATUS = 'INCORPORATED' THEN 1 END) AS quantidade_incorporated
+FROM CHASSI_BOLETIM cb
+GROUP BY cb.ID_CHASSI;
+
+-- quantidade de utilizacoes dos boletins nos chassis
+CREATE OR REPLACE VIEW v_qtd_utilizacao_boletim AS
+SELECT bs.ID_BOLETIM,
+       COUNT(DISTINCT cb.ID_CHASSI) AS quantidade_total_usos,
+       COUNT(DISTINCT CASE WHEN cb.STATUS = 'INCORPORATED' THEN cb.ID_CHASSI END) AS quantidade_incorporated,
+       COUNT(DISTINCT CASE WHEN cb.STATUS = 'APPLICABLE' THEN cb.ID_CHASSI END) AS quantidade_applicable
+FROM BOLETIM_SERVICO bs
+LEFT JOIN CHASSI_BOLETIM cb ON bs.ID_BOLETIM = cb.ID_BOLETIM
+GROUP BY bs.ID_BOLETIM
+ORDER BY quantidade_incorporated + quantidade_applicable DESC;
+
+-- quantidade total de chassi
+CREATE OR REPLACE VIEW v_qtd_chassi AS
+SELECT COUNT(*) AS quantidade_chassi
+FROM chassi;
+
+-- quantidade total de boletins
+CREATE OR REPLACE VIEW v_qtd_boletim AS
+SELECT COUNT(*) AS quantidade_boletim
+FROM boletim_servico;
+
+-- seleciona todos os itens do banco que são instalados de fabrica
+CREATE OR REPLACE VIEW v_todos_itens_fabrica AS
+SELECT DISTINCT I.ID_ITEM, I.NOME
+FROM ITEM I
+JOIN LOGICA_FABRICA ON I.ID_ITEM = LOGICA_FABRICA.ID_ITEM
+ORDER BY ID_ITEM;
+
+-- seleciona todos os itens do banco que são instalados por boletim
+CREATE OR REPLACE VIEW v_todos_itens_boletins AS
+SELECT DISTINCT I.ID_ITEM, I.NOME
+FROM ITEM I
+JOIN LOGICA_BOLETIM ON I.ID_ITEM = LOGICA_BOLETIM.ID_ITEM
+ORDER BY ID_ITEM;
+
+-- retorna o craft
+CREATE OR REPLACE VIEW v_craft_itens AS
+SELECT I.ID_ITEM, I.NOME, LF.CHASSI_MINIMO,
+  CASE WHEN LF.CHASSI_MINIMO IS NOT NULL THEN 1 ELSE 0 END AS FABRICA,
+  CASE WHEN LF.CHASSI_MINIMO IS NULL THEN 1 ELSE NULL END AS BOLETIM,
+  LB.INPUT1 AS ID_BOLETIM1, LB.OPERACAO AS OPERACAO1,
+  LB.INPUT2 AS ID_BOLETIM2
+FROM ITEM I
+LEFT JOIN LOGICA_FABRICA LF ON I.ID_ITEM = LF.ID_ITEM
+LEFT JOIN LOGICA_BOLETIM LB ON I.ID_ITEM = LB.ID_ITEM
+LEFT JOIN BOLETIM_SERVICO BS1 ON LB.INPUT1 = BS1.ID_BOLETIM
+LEFT JOIN BOLETIM_SERVICO BS2 ON LB.INPUT2 = BS2.ID_BOLETIM;
+
+
+-- retorna os dados da auditoria do status na tabela chassi_boletim
+CREATE OR REPLACE VIEW v_auditoria_chassi_boletim AS
+SELECT cba.id_auditoria, cba.ID_CHASSI, cba.ID_BOLETIM, cba.STATUS_ANTERIOR, cba.STATUS_NOVO, cba.DATA_MODIFICACAO , u.userNAME
+FROM CHASSI_BOLETIM_AUDIT cba
+JOIN USERS u
+ON cba.modificado_por = u.id 
+order by id_auditoria desc
+
+-- retorna os dados de auditoria update
+CREATE VIEW V_AUDITORIA_LOGICA_UPDATE AS
+SELECT LBA.ID_AUDITORIA, LBA.ID_LOGICA, LBA.INPUT1_ANTES, LBA.INPUT1_DEPOIS, LBA.OPERACAO_ANTES, LBA.OPERACAO_DEPOIS, LBA.INPUT2_ANTES, LBA.INPUT2_DEPOIS, LBA.DEPENDENCIA_ANTES, LBA.DEPENDENCIA_DEPOIS, LBA.ID_ITEM_ANTES, LBA.ID_ITEM_DEPOIS, LBA.DATA_MODIFICACAO,  U.USERNAME
+FROM LOGICA_BOLETIM_AUDIT LBA
+JOIN USERS U
+ON LBA.MODIFICADO_POR = U.ID
+WHERE TIPO = 'U'
