@@ -1,0 +1,39 @@
+CREATE OR REPLACE TRIGGER logica_boletim_audit_update_trg
+AFTER UPDATE ON LOGICA_BOLETIM
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGICA_BOLETIM_AUDIT (
+        ID_AUDITORIA,
+        ID_LOGICA,
+        INPUT1_ANTES,
+        INPUT1_DEPOIS,
+        OPERACAO_ANTES,
+        OPERACAO_DEPOIS,
+        INPUT2_ANTES,
+        INPUT2_DEPOIS,
+        DEPENDENCIA_ANTES,
+        DEPENDENCIA_DEPOIS,
+        ID_ITEM_ANTES,
+        ID_ITEM_DEPOIS,
+        DATA_MODIFICACAO,
+        MODIFICADO_POR,
+	TIPO
+    ) VALUES (
+        LOGICA_BOLETIM_AUDIT_SEQ.NEXTVAL,
+        :OLD.ID_LOGICA,
+        :OLD.INPUT1,
+        :NEW.INPUT1,
+        :OLD.OPERACAO,
+        :NEW.OPERACAO,
+        :OLD.INPUT2,
+        :NEW.INPUT2,
+        :OLD.DEPENDENCIA,
+        :NEW.DEPENDENCIA,
+        :OLD.ID_ITEM,
+        :NEW.ID_ITEM,
+        SYSDATE,
+        :NEW.MODIFICADO_POR,
+	    'U'
+    );
+END;
+/
