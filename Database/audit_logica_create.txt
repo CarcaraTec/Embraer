@@ -1,0 +1,39 @@
+CREATE OR REPLACE TRIGGER logica_boletim_audit_create_trg
+AFTER INSERT ON LOGICA_BOLETIM
+FOR EACH ROW
+BEGIN
+    INSERT INTO LOGICA_BOLETIM_AUDIT (
+        ID_AUDITORIA,
+        ID_LOGICA,
+        INPUT1_ANTES,
+        INPUT1_DEPOIS,
+        OPERACAO_ANTES,
+        OPERACAO_DEPOIS,
+        INPUT2_ANTES,
+        INPUT2_DEPOIS,
+        DEPENDENCIA_ANTES,
+        DEPENDENCIA_DEPOIS,
+        ID_ITEM_ANTES,
+        ID_ITEM_DEPOIS,
+        DATA_MODIFICACAO,
+        MODIFICADO_POR,
+        TIPO -- Incluir a coluna TIPO no INSERT
+    ) VALUES (
+        LOGICA_BOLETIM_AUDIT_SEQ.NEXTVAL,
+        :NEW.ID_LOGICA,
+        NULL,
+        :NEW.INPUT1,
+        NULL,
+        :NEW.OPERACAO,
+        NULL,
+        :NEW.INPUT2,
+        NULL,
+        :NEW.DEPENDENCIA,
+        NULL,
+        :NEW.ID_ITEM,
+        SYSDATE,
+        :NEW.MODIFICADO_POR,
+        'C' -- Valor padrão para a coluna TIPO
+    );
+END;
+/

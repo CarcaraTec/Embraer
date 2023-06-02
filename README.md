@@ -24,9 +24,9 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
 
 - [x] **SPRINT 3** - 24/04/2023 a 14/05/2023
 
-- [ ] **SPRINT 4** - 15/05/2023 a 04/06/2023
+- [x] **SPRINT 4** - 15/05/2023 a 04/06/2023
 
-- [ ] **Solutions fair** - 13/06/2023 - 14/06/2023 at 7pm
+- [x] **Solutions fair** - 13/06/2023 - 14/06/2023 at 7pm
 
 
 
