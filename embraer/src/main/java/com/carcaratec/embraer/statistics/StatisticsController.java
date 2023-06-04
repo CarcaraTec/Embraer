@@ -1,7 +1,9 @@
 package com.carcaratec.embraer.statistics;
 
+import com.carcaratec.embraer.model.record.DadosCadastroItemReturn;
 import com.carcaratec.embraer.repository.ChassiRepository;
 import com.carcaratec.embraer.service.LogicControl;
+import com.carcaratec.embraer.statistics.model.ApplicableItems;
 import com.carcaratec.embraer.statistics.model.QtdItensIntalados;
 import com.carcaratec.embraer.statistics.model.StatisticsBoletimPorChassi;
 import com.carcaratec.embraer.statistics.model.UtilizacoesBoletins;
@@ -47,5 +49,11 @@ public class StatisticsController {
     public QtdItensIntalados listQtdInstalados (@PathVariable("id") Integer idItem) {
         QtdItensIntalados qtditems = statisticsService.verificaItensIntalados(idItem);
         return qtditems;
+    }
+
+    @GetMapping("/applicable")
+    public List<DadosCadastroItemReturn> listApplicable (@RequestParam("idChassi") Integer idChassi){
+        List<DadosCadastroItemReturn> list = statisticsService.VerificaItemsApplicable(idChassi);
+        return list;
     }
 }

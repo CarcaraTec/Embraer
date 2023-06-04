@@ -38,6 +38,17 @@ public class VerificacaoHierarquia {
         return isValid;
     }
 
+    public Boolean verificaBoletimApplicable(Integer idChassi, String boletim){
+        ChassiBoletim listBoletim = chassiBoletimRepository.findBoletimByIdAndChassi(boletim, idChassi);
+        boolean isValid = false;
+        if(listBoletim != null){
+            if(listBoletim.getStatus().equals("APPLICABLE")){
+                isValid = true;
+            }
+        }
+        return isValid;
+    }
+
     public String estaInstaladoAnd(Integer idChassi, String boletim1, String boletim2) {
         String status = "❌";
         if (verificaBoletim(idChassi, boletim1)) {
@@ -47,6 +58,20 @@ public class VerificacaoHierarquia {
                 }
             }else{
                 status = "✔";
+            }
+        }
+        return status;
+    }
+
+    public String isApplicableAnd(Integer idChassi, String boletim1, String boletim2){
+        String status = "NOT APPLICABLE";
+        if(verificaBoletimApplicable(idChassi,boletim1)) {
+            if(boletim2!=null) {
+                if(verificaBoletimApplicable(idChassi,boletim2)){
+                    status = "APPLICABLE";
+                }
+            }else{
+                status = "APPLICABLE";
             }
         }
         return status;
@@ -63,4 +88,13 @@ public class VerificacaoHierarquia {
         return status;
     }
 
+    public String isApplicableOr(Integer idChassi, String boletim1, String boletim2){
+        String status = "NOT APPLICABLE";
+        Boolean input1 = verificaBoletimApplicable(idChassi,boletim1);
+        Boolean input2 = verificaBoletimApplicable(idChassi,boletim2);
+        if(input1 || input2){
+            status = "APPLICABLE";
+        }
+        return status;
+    }
 }
