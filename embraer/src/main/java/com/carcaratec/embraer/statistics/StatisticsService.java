@@ -219,5 +219,18 @@ public class StatisticsService extends VerificacaoHierarquia {
 
         return listItemReturn;
     }
+
+    public List<DadosCadastroItemReturn> InstalledAndApplicable(Integer idChassi) {
+        List<DadosCadastroItemReturn> listaFinal = new ArrayList<>();
+
+        List<DadosCadastroItemReturn> listaApplicable = VerificaItemsApplicable(idChassi);
+        List<DadosCadastroItemReturn> listaInstalados = VerificaItemsInstalados(idChassi);
+
+        listaFinal.addAll(listaApplicable);
+        listaFinal.addAll(listaInstalados);
+
+        return listaFinal;
+    }
+
 }
 

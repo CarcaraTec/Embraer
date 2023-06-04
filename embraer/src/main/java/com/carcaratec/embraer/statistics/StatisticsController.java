@@ -62,4 +62,10 @@ public class StatisticsController {
         List<DadosCadastroItemReturn> list = statisticsService.VerificaItemsInstalados(idChassi);
         return list;
     }
+
+    @GetMapping("/installedAndApplicable")
+    public List<DadosCadastroItemReturn> listInstalledApplicable (@RequestParam("idChassi") Integer idChassi){
+        List<DadosCadastroItemReturn> list = statisticsService.InstalledAndApplicable(idChassi);
+        return list;
+    }
 }
