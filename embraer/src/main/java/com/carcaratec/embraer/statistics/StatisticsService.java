@@ -167,5 +167,57 @@ public class StatisticsService extends VerificacaoHierarquia {
         }
         return listItemReturn;
     }
+
+
+    public List<DadosCadastroItemReturn> VerificaItemsInstalados(Integer idChassi) {
+        List<DadosCadastroItemReturn> listItemReturn = new ArrayList<>();
+        List<Item> listItem = itemRepository.findAll();
+        for (Item item : listItem) {
+            DadosCadastroItemReturn cadastroItemReturn;
+            String fabrica = String.valueOf(logicaFabricaRepository.findItemFactory(idChassi, item.getIdItem()));
+            String status = "";
+            if (!fabrica.equals("null")) {
+                status = fabrica.equals("1") ? "✔" : "❌";
+            } else {
+                List<Hierarquia> logica = new ArrayList<>();
+                boolean produto = false;
+                Integer idLogica = hierarquiaRepository.findByIdItemOrderByNivelDesc(item.getIdItem()).get(0).getIdLogica();
+
+                while (true) {
+                    logica = hierarquiaRepository.findByIdLogica(idLogica);
+                    Integer dependencia = logica.get(0).getDependencia();
+                    String boletim1 = produto ? logica.get(0).getInput2() : logica.get(0).getInput1();
+                    String boletim2 = logica.get(0).getInput2();
+                    String operador = logica.get(0).getOperacao().replaceAll(" ", "");
+
+                    if (dependencia != null && !produto) {
+                        logica = hierarquiaRepository.findByIdLogica(dependencia);
+                        produto = true;
+                    } else {
+                        produto = false;
+                    }
+
+                    switch (operador) {
+                        case "AND":
+                            status = estaInstaladoAnd(idChassi, boletim1, boletim2);
+                            break;
+                        case "OR":
+                            status = estaInstaladoOr(idChassi, boletim1, boletim2);
+                            break;
+                    }
+                    if (!produto) {
+                        break;
+                    }
+                }
+            }
+            cadastroItemReturn = new DadosCadastroItemReturn(item.getIdItem(), item.getNome(), status);
+            if(status.equals("✔")) {
+                listItemReturn.add(cadastroItemReturn);
+            }
+            itemFabrica.put(String.valueOf(item.getIdItem()), fabrica);
+        }
+
+        return listItemReturn;
+    }
 }
 
