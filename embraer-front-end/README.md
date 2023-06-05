@@ -1,24 +1,3 @@
-# alura-tracker
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Free Modernize vuejs 3 based admin dashboard template Download it for free
+Modernize vue3 + vite + typescript +vuetify 3 admin Template
+# Chekcout the live link : https://modernize-vue3-free.netlify.app/ <a href="https://modernize-vue3-free.netlify.app/">Live Preview </a>
