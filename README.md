@@ -52,7 +52,7 @@ Nowadays many pilots work as "freelancers" and do not operate only one aircraft/
   * Audit
   * Authentication (editor, driver)
   * Rule editor
-  * Push Notification Development
+  * Notification Development
   * User Manual
 
 ## 📔 **FUNCTIONAL REQUIREMENTS**
