@@ -1,15 +1,7 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <RouterView></RouterView>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'App',
-};
+<script setup lang="ts">
+import { RouterView } from "vue-router";
 </script>
-
-<style>
-/* Estilos do seu componente App.vue */
-</style>
