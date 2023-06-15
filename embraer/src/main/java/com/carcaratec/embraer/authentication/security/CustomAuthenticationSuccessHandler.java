@@ -43,6 +43,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         System.out.println("Usuário logado: " + username);
 
         // Redirecionar para a página desejada após o login bem-sucedido
-        response.sendRedirect("http://localhost:8080/menu"); // substitua "/dashboard" pela URL desejada
+        response.sendRedirect("http://localhost:3000"); // substitua "/dashboard" pela URL desejada
     }
 }

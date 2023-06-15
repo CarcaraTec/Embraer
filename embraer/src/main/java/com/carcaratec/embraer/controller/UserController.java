@@ -2,6 +2,8 @@ package com.carcaratec.embraer.controller;
 
 import com.carcaratec.embraer.model.dto.CreateUserRoleDTO;
 import com.carcaratec.embraer.model.dto.User;
+import com.carcaratec.embraer.model.record.DadosListagemUser;
+import com.carcaratec.embraer.repository.UsuarioRepository;
 import com.carcaratec.embraer.service.CreateRoleUserService;
 import com.carcaratec.embraer.service.CreateUserService;
 import org.json.JSONObject;
@@ -11,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -22,6 +26,9 @@ public class UserController {
 
     @Autowired
     CreateRoleUserService createRoleUserService;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
 
 
@@ -46,6 +53,12 @@ public class UserController {
             return user.toString();
         }
         return "Nenhum usuário logado";
+    }
+
+    @GetMapping("/listUsers/{roleId}")
+    public List<DadosListagemUser> listagemUsers (@PathVariable("roleId") UUID roleId){
+        var users = usuarioRepository.findByRolesId(roleId).stream().map(DadosListagemUser::new).toList();
+        return users;
     }
 
 

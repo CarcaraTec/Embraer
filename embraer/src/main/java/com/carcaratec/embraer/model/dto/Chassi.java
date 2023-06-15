@@ -4,6 +4,7 @@ import com.carcaratec.embraer.model.record.DadosCadastroChassi;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name = "CHASSI")
 @Getter
+@Setter
 public class Chassi{
 
     @Id
@@ -27,5 +29,10 @@ public class Chassi{
     public Chassi(DadosCadastroChassi dados) {
         this.idChassi = dados.idChassi();
 //        this.proprietario = dados.proprietario();
+    }
+
+    public void atualizarChassi (Chassi chassi){
+        this.idChassi = chassi.idChassi;
+        this.proprietario = chassi.proprietario;
     }
 }
