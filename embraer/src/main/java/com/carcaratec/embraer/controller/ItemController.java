@@ -91,4 +91,12 @@ public class ItemController {
         logica.setModificadoPor(usuarioRepository.findByUsername(userDetails.getUsername()).getId());
         logica.atualizarLogica(logicaBoletim);
     }
+
+    @GetMapping("/hierarquiaByIdItem/{id}")
+    public List<Hierarquia> findHierarquiaByItem(@PathVariable("id") Integer id) {
+        List<Hierarquia> listHierarquia = hierarquiaRepository.findByIdItem(id);
+        return listHierarquia;
+    }
+
+
 }
